@@ -38,12 +38,3 @@ radius_map = sqrt 2 * axis_map;
 // script convoy
 
 [] execVM "Script\enemy_patrol.sqf";
-
-
-enableDynamicSimulationSystem true;
-"Group" setDynamicSimulationDistance 1000;
-"Vehicle" setDynamicSimulationDistance 1000;
-"EmptyVehicle" setDynamicSimulationDistance 1000;
-"Prop" setDynamicSimulationDistance 1000;
-
-"IsMoving" setDynamicSimulationDistanceCoef 2;

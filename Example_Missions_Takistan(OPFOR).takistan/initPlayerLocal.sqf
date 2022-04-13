@@ -20,7 +20,8 @@ _action_call_vdv_paradrop = ["TestAction_call_help","Запросить помо
 player addEventHandler [
 	"Killed",
 	{
-		[player, [missionNamespace, "playerInventory"]] call BIS_fnc_saveInventory;
+		[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_saveInventory;
+
 		true
 	}
 ];
@@ -29,18 +30,97 @@ player addEventHandler [
 	"Respawn",
 	{	
 		player addAction ["<t color='#00ff22'>Меню игрока</t>",
-			"0 spawn{ 
-			createDialog 'Dialog_Player_general'; 
-			while {dialog} do { 
-			ctrlSetText [1908, str (sliderPosition 1900)]; 
-			ctrlSetText [1909, str (sliderPosition 1901)]; 
-			ctrlSetText [1910, str (sliderPosition 1902)]; 
-			sleep 1; 
-			};
-			};"
-			];
-		[player, [missionNamespace, "playerInventory"]] call BIS_fnc_loadInventory;
+			"[] spawn{			
+				createDialog 'Dialog_Player_general';
+				waitUntil{
+					ctrlSetText [1908, str (sliderPosition 1900)]; 
+					ctrlSetText [1909, str (sliderPosition 1901)]; 
+					ctrlSetText [1910, str (sliderPosition 1902)]; 
+					!dialog
+				};
+			}"
+		];
+		[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_loadInventory;
 		true
 	}
 ];
+
+
+// save and load inventory
+
+[
+	ammo_1,											// object the action is attached to
+	"<t color='#00d5ff'>Сохранить снаряжение</t>",										// Title of the action
+	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_loaddevice_ca.paa",	// Idle icon shown on screen
+	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_loaddevice_ca.paa",	// Progress icon shown on screen
+	"_this distance _target < 10",						// Condition for the action to be shown
+	"_caller distance _target < 10",						// Condition for the action to progress
+	{},													// Code executed when action starts
+	{},													// Code executed on every progress tick
+	{ [player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_saveInventory; },				// Code executed on completion
+	{},													// Code executed on interrupted
+	[],													// Arguments passed to the scripts as _this select 3
+	3,													// action duration in seconds
+	0,													// priority
+	false,												// Remove on completion
+	false												// Show in unconscious state
+] call BIS_fnc_holdActionAdd;	// MP compatible implementation
+
+[
+	ammo_1,											// object the action is attached to
+	"<t color='#006eff'>Загрузить снаряжение</t>",										// Title of the action
+	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unloaddevice_ca.paa",	// Idle icon shown on screen
+	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unloaddevice_ca.paa",	// Progress icon shown on screen
+	"_this distance _target < 10",						// Condition for the action to be shown
+	"_caller distance _target < 10",						// Condition for the action to progress
+	{},													// Code executed when action starts
+	{},													// Code executed on every progress tick
+	{ [player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory; },				// Code executed on completion
+	{},													// Code executed on interrupted
+	[],													// Arguments passed to the scripts as _this select 3
+	3,													// action duration in seconds
+	0,													// priority
+	false,												// Remove on completion
+	false												// Show in unconscious state
+] call BIS_fnc_holdActionAdd;	// MP compatible implementation
+
+[
+	ammo_2,											// object the action is attached to
+	"<t color='#00d5ff'>Сохранить снаряжение</t>",										// Title of the action
+	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_loaddevice_ca.paa",	// Idle icon shown on screen
+	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_loaddevice_ca.paa",	// Progress icon shown on screen
+	"_this distance _target < 10",						// Condition for the action to be shown
+	"_caller distance _target < 10",						// Condition for the action to progress
+	{},													// Code executed when action starts
+	{},													// Code executed on every progress tick
+	{ [player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_saveInventory; },				// Code executed on completion
+	{},													// Code executed on interrupted
+	[],													// Arguments passed to the scripts as _this select 3
+	3,													// action duration in seconds
+	0,													// priority
+	false,												// Remove on completion
+	false												// Show in unconscious state
+] call BIS_fnc_holdActionAdd;	// MP compatible implementation
+
+
+
+
+[
+	ammo_2,											// object the action is attached to
+	"<t color='#006eff'>Загрузить снаряжение</t>",										// Title of the action
+	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unloaddevice_ca.paa",	// Idle icon shown on screen
+	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unloaddevice_ca.paa",	// Progress icon shown on screen
+	"_this distance _target < 10",						// Condition for the action to be shown
+	"_caller distance _target < 10",						// Condition for the action to progress
+	{},													// Code executed when action starts
+	{},													// Code executed on every progress tick
+	{ [player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory; },				// Code executed on completion
+	{},													// Code executed on interrupted
+	[],													// Arguments passed to the scripts as _this select 3
+	3,													// action duration in seconds
+	0,													// priority
+	false,												// Remove on completion
+	false												// Show in unconscious state
+] call BIS_fnc_holdActionAdd;	// MP compatible implementation
+
 

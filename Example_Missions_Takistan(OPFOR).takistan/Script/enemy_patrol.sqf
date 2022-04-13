@@ -7,12 +7,8 @@ _list_road = center_map nearRoads radius_map;
 // цыкл создания техники
 Stot_patrol = true;
 // функция поиска дороги
-{
-	if(getPos _x inArea [getmarkerPos "Pos_base", 2000, 2000, 45, false])then{
-		_list_road = _list_road - [_x];
-	}
-	
-} forEach _list_road;
+private _nearbyLocations = nearestLocations [center_map, ['Name','NameCity','NameCityCapital','NameVillage'], radius_map]; 
+
 
 waitUntil{
 	// выбор техники
@@ -24,7 +20,11 @@ waitUntil{
 		_mission_arry_vehicle append heli_vehecle_arry;
 		private _select_vehicle = selectRandom _mission_arry_vehicle;
 		// создание техники
-		private _vehicle = [getPos (selectRandom _list_road), 180,_select_vehicle, independent] call BIS_fnc_spawnVehicle;
+		private _select_location = selectRandom _nearbyLocations; 
+		private _locationPos = locationPosition _select_location;
+		private _find_road = [_locationPos, 1000] call BIS_fnc_nearestRoad;
+		private _pos_from_vehicle = getPos  _find_road;
+		private _vehicle = [_pos_from_vehicle, 180,_select_vehicle, independent] call BIS_fnc_spawnVehicle;
 		
 		for "_i" from 0 to ((_vehicle select 0) emptyPositions "cargo") - 1 do 
 		{
@@ -33,14 +33,16 @@ waitUntil{
 		};
 
 		// добавляю патруль
-		[_vehicle select 2, getPos (_vehicle select 0), 3000] call BIS_fnc_taskPatrol;
+		[_vehicle select 2, getPos (_vehicle select 0), 500] call BIS_fnc_taskPatrol;
 
 		_count_vehicle pushBack (_vehicle select 0);
+
+		group ((_vehicle select 1)select 0) enableDynamicSimulation true;
 	};
 	//
 	{
 		if(!alive _x) then {_count_vehicle = _count_vehicle - [_x]}
 	} forEach _count_vehicle;
-	sleep 30;
+	sleep 1;
 	!Stot_patrol
 };

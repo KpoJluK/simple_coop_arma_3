@@ -253,7 +253,7 @@ class Dialog_Player_general
 			soundEnter[] = {"\A3\ui_f\data\sound\RscButton\soundEnter",0.09,1.0};
 			soundEscape[] = {"\A3\ui_f\data\sound\RscButton\soundEscape",0.09,1.0};
 			soundPush[] = {"\A3\ui_f\data\sound\RscButton\soundPush",0.09,1.0};
-			action = "if(serverCommandAvailable '#kick')then{[[], {0 setOvercast sliderPosition 1901;}] remoteExec ['call',0];}else{hint'У вас нет прав администратора'}";
+			action = "if(serverCommandAvailable '#kick')then{[[], {[sliderPosition 1901] call BIS_fnc_setOvercast;}] remoteExec ['call',0];}else{hint'У вас нет прав администратора'}";
 			
 		};
 		class Control1827551605_copy1_copy1
