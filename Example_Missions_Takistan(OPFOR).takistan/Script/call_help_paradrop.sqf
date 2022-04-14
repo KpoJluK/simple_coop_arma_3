@@ -24,74 +24,23 @@ if(Call_help_paradrop)exitWith{hint "Самолет еще не готов дл�
 		// жду пока самолет булет над точкой
 		waitUntil{
 			sleep 1;
-			((getPos (_C_130 select 0)) inArea [_Position_player, 150, 150, 0, false])
+			((getPos (_C_130 select 0)) inArea [_Position_player, 150, 150, 0, false]) or !alive (_C_130 select 0)
 		};
+		if(!alive (_C_130 select 0))exitWith{};
 		// создаю группу десанта
-		private _group_desant = createGroup [EAST, true];
+		private _group_desant = createGroup [side (selectRandom allPlayers), true];
 		_pos_C_130 = getPosATL (_C_130 select 0);
 		for "_i" from 0 to 8 do 
 		{
-			_pos_X = (_pos_C_130 select 0) + random [-100,0,100];
-			_pos_Y = (_pos_C_130 select 1) + random [-100,0,100];
-			_pos_Z = (_pos_C_130 select 2) + random [-100,0,100];
+			_pos_X = (_pos_C_130 select 0) + random [-200,0,200];
+			_pos_Y = (_pos_C_130 select 1) + random [-200,0,200];
+			_pos_Z = (_pos_C_130 select 2);
 
-			_unit_desant = _group_desant createUnit ["SpecLib_O_R_S_Ratnik_medic_F",[_pos_X, _pos_Y, _pos_Z], [], 0, "FORM"];
+			_unit_desant = _group_desant createUnit [selectRandom arry_inf_call_help_vdv,[_pos_X, _pos_Y, _pos_Z], [], 0, "FORM"];
 			_unit_desant setSkill 1;
 			_unit_desant setSkill ["courage", 1];
 
-
-			comment "Remove existing items";
-			removeAllWeapons _unit_desant;
-			removeAllItems _unit_desant;
-			removeAllAssignedItems _unit_desant;
-			removeUniform _unit_desant;
-			removeVest _unit_desant;
-			removeBackpack _unit_desant;
-			removeHeadgear _unit_desant;
-			removeGoggles _unit_desant;
-
-			comment "Add weapons";
-			_unit_desant addWeapon "rhs_weap_ak74mr";
-			_unit_desant addPrimaryWeaponItem "rhs_acc_ak5";
-			_unit_desant addPrimaryWeaponItem "rhs_acc_perst3_2dp_h";
-			_unit_desant addPrimaryWeaponItem "rhsusf_acc_su230a";
-			_unit_desant addPrimaryWeaponItem "rhs_30Rnd_545x39_7N22_AK";
-			_unit_desant addPrimaryWeaponItem "rhs_acc_grip_rk6";
-			_unit_desant addWeapon "rhs_weap_rpg26";
-			_unit_desant addWeapon "rhs_weap_pya";
-			_unit_desant addHandgunItem "rhs_mag_9x19_17";
-
-			comment "Add containers";
-			_unit_desant forceAddUniform "TFN_L9_Gen3_fs_or_cb_NFlag_uniform";
-			_unit_desant addVest "AK_LBT";
-			_unit_desant addBackpack "B_Parachute";
-
-			comment "Add items to containers";
-			_unit_desant addItemToUniform "ACE_IR_Strobe_Item";
-			_unit_desant addItemToUniform "PiR_bint";
-			for "_i" from 1 to 2 do {_unit_desant addItemToUniform "ACE_Chemlight_HiRed";};
-			for "_i" from 1 to 2 do {_unit_desant addItemToUniform "ACE_Chemlight_IR";};
-			for "_i" from 1 to 2 do {_unit_desant addItemToUniform "ACE_Chemlight_HiWhite";};
-			_unit_desant addItemToUniform "MS_Strobe_Mag_2";
-			for "_i" from 1 to 2 do {_unit_desant addItemToVest "PiR_bint";};
-			for "_i" from 1 to 4 do {_unit_desant addItemToVest "ACE_CableTie";};
-			for "_i" from 1 to 6 do {_unit_desant addItemToVest "rhs_30Rnd_545x39_7N22_AK";};
-			for "_i" from 1 to 2 do {_unit_desant addItemToVest "rhs_mag_rgd5";};
-			for "_i" from 1 to 2 do {_unit_desant addItemToVest "rhs_mag_9x19_17";};
-			_unit_desant addHeadgear "lshzmc2";
-			_unit_desant addGoggles "YuEBalaklava2mc";
-
-			comment "Add items";
-			_unit_desant linkItem "ItemMap";
-			_unit_desant linkItem "ItemCompass";
-			_unit_desant linkItem "ACE_Altimeter";
-			_unit_desant linkItem "ItemRadio";
-			_unit_desant linkItem "ItemGPS";
-			_unit_desant linkItem "Louetta_PVS31A_2";
-
-			comment "Set identity";
-			[_unit_desant,"WhiteHead_13","male02rus"] call BIS_fnc_setIdentity;
-
+			[_unit_desant]call fnc_Eqvip_desant;
 
 			sleep 1;
 		};

@@ -16,14 +16,13 @@ waitUntil{
 		_mission_arry_vehicle = [];
 		_mission_arry_vehicle append car_mission_arry;
 		_mission_arry_vehicle append hevy_vehicle_arry;
-		_mission_arry_vehicle append anti_air_vehicle_arry;
 		_mission_arry_vehicle append heli_vehecle_arry;
 		private _select_vehicle = selectRandom _mission_arry_vehicle;
 		// создание техники
 		private _select_location = selectRandom _nearbyLocations; 
 		private _locationPos = locationPosition _select_location;
-		private _find_road = [_locationPos, 1000] call BIS_fnc_nearestRoad;
-		private _pos_from_vehicle = getPos  _find_road;
+		private _pos_from_vehicle = [_locationPos, 100, 500, 15, 0, 0.7, 0] call BIS_fnc_findSafePos;
+		
 		private _vehicle = [_pos_from_vehicle, 180,_select_vehicle, independent] call BIS_fnc_spawnVehicle;
 		
 		for "_i" from 0 to ((_vehicle select 0) emptyPositions "cargo") - 1 do 

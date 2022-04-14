@@ -54,7 +54,7 @@ deleteVehicle _car;
 //task
 ["Task_08", true, ["Уничтожить технику пока она не добралась до места назначения","Уничтожить технику пока она не добралась до места назначения","respawn_west"], getmarkerPos "Pos_convoy_45", "CREATED", 5, true, true, "kill", true] call BIS_fnc_setTask;
 
-sleep 300;
+
 
 //Vehicle
 private _BMP_delivery_explousion = [getmarkerPos "Pos_convoy_45", 180,selectRandom arry_class_name_vehicle_first_in_convoy, independent] call BIS_fnc_spawnVehicle;

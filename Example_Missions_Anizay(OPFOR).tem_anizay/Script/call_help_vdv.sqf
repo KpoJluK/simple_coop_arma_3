@@ -63,20 +63,23 @@ if(Call_help)exitWith{hint "Вертолет еще не готов для вз�
     // Ждём пока дистанция будет менее 1000 метров - начинаем выпускать ловушки
     waitUntil {
     sleep 1;
-    (_heli distance getPos _helipad) < 1000
+    (_heli distance getPos _helipad) < 1000 or !alive _heli
     };
+    if(!alive _heli)exitWith{};
     // Откидываем ловушки
     _heli spawn _flares;
     // Ждём пока дистанция будет менее 300 метров - приказываем садиться
     waitUntil {
-    (_heli distance getPos _helipad) < 300
+    (_heli distance getPos _helipad) < 300 or !alive _heli
     };
+    if(!alive _heli)exitWith{};
     // Садимся с высадкой десанта
     _heli land "get out";
     // Высота полёта = 0. На всякий случай.
     _heli flyInHeight 0;
     // Ждём пока вертолёт будет стоять на земле
-    waitUntil {isTouchingGround _heli};
+    waitUntil {isTouchingGround _heli or !alive _heli};
+    if(!alive _heli)exitWith{};
     // Выкидываем дымы по кругу
     for "_i" from 0 to 5 do 
     {
@@ -94,6 +97,7 @@ if(Call_help)exitWith{hint "Вертолет еще не готов для вз�
     _wp =_supgroup addWaypoint [position player, 0];
     _wp setWaypointType "HOLD";
     // Приказываем вертолёту уходить на указанные координаты
+    if(!alive _heli)exitWith{};
     _heli domove [0,0,0];
     // Задаём высоту полёта
     _heli flyinheight 50;
@@ -102,6 +106,7 @@ if(Call_help)exitWith{hint "Вертолет еще не готов для вз�
     // Ждём пока дистанция будет менее 300 метров - удаляем вертолёт
     waitUntil {
     sleep 1;
+    if(!alive _heli)exitWith{};
     (_heli distance [0,0,0]) < 150
     };
     {deleteVehicle _x} forEach ((units group _heli) + [_heli]);

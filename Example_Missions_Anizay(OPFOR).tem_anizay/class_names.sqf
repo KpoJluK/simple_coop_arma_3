@@ -1,138 +1,48 @@
-// from spawner
+waitUntil{
+	sleep 1;
+	!isNil {Ready_enemy}
+};
 
-inf_missions_arry = 
-[
-	"UK3CB_ADM_I_AA", 
-	"UK3CB_ADM_I_AT", 
-	"UK3CB_ADM_I_AR", 
-	"UK3CB_ADM_I_ENG", 
-	"UK3CB_ADM_I_GL", 
-	"UK3CB_ADM_I_IED", 
-	"UK3CB_ADM_I_LAT", 
-	"UK3CB_ADM_I_MG", 
-	"UK3CB_ADM_I_MK", 
-	"UK3CB_ADM_I_MD", 
-	"UK3CB_ADM_I_RIF_1", 
-	"UK3CB_ADM_I_RIF_2", 
-	"UK3CB_ADM_I_SL", 
-	"UK3CB_ADM_I_SNI", 
-	"UK3CB_ADM_I_SPOT", 
-	"UK3CB_ADM_I_TL"
-];
+// боты которые прилетают на поддержку игрока
 
-car_mission_arry = 
-[
-	"UK3CB_ADM_I_BTR40_MG", 
-	"UK3CB_ADM_I_MTLB_PKT", 
-	"UK3CB_ADM_I_BRDM2", 
-	"UK3CB_ADM_I_BRDM2_HQ", 
-	"UK3CB_ADM_I_Datsun_Pkm", 
-	"UK3CB_ADM_I_Hilux_GMG", 
-	"UK3CB_ADM_I_Hilux_Rocket_Arty", 
-	"UK3CB_ADM_I_Hilux_Dshkm", 
-	"UK3CB_ADM_I_Hilux_Pkm", 
-	"UK3CB_ADM_I_Hilux_Spg9", 
-	"UK3CB_ADM_I_Hilux_Rocket", 
-	"UK3CB_ADM_I_Hilux_Zu23", 
-	"UK3CB_ADM_I_LR_AGS30", 
-	"UK3CB_ADM_I_LR_M2", 
-	"UK3CB_ADM_I_LR_SPG9", 
-	"UK3CB_ADM_I_LR_SF_AGS30", 
-	"UK3CB_ADM_I_LR_SF_M2", 
-	"UK3CB_ADM_I_Offroad_M2", 
-	"UK3CB_ADM_I_Pickup_DSHKM"
-];
+_player_faction = ([] call BIS_fnc_getFactions select 182);
 
-hevy_vehicle_arry = 
-[
-	"UK3CB_ADM_I_T34", 
-	"UK3CB_ADM_I_T55"
-];
+_arry_inf_call_help_vdv_not_redy = "(getText (_x >> 'faction') == _player_faction) and (configName _x isKindOf ""Man"")" configClasses (configFile >> "CfgVehicles"); 
 
-anti_air_vehicle_arry = 
-[
-	"UK3CB_ADM_I_V3S_Zu23", 
-	"UK3CB_ADM_I_MTLB_ZU23", 
-	"UK3CB_ADM_I_Hilux_Zu23"
-];
-
-heli_vehecle_arry = 
-[
-	"UK3CB_ADA_I_UH1H_GUNSHIP", 
-	"UK3CB_ADA_I_UH1H_M240"
-];
-
-static_weapon_arry = 
-[
-	"UK3CB_ADM_I_2b14_82mm", 
-	"UK3CB_ADM_I_Igla_AA_pod", 
-	"UK3CB_ADM_I_AGS", 
-	"UK3CB_ADM_I_DSHKM", 
-	"UK3CB_ADM_I_KORD_high", 
-	"UK3CB_ADM_I_ZU23"
-];
-
-arry_inf_call_help_vdv =[
-	"SpecLib_O_R_D_Ratnik_AAT_F", 
-	"SpecLib_O_R_D_Ratnik_TL_F", 
-	"SpecLib_O_R_D_Ratnik_MG_F", 
-	"SpecLib_O_R_D_Ratnik_AR_F", 
-	"SpecLib_O_R_D_Ratnik_medic_F", 
-	"SpecLib_O_R_D_Ratnik_M_F", 
-	"SpecLib_O_R_D_Ratnik_GL_F", 
-	"SpecLib_O_R_D_Ratnik_LAT_01_F", 
-	"SpecLib_O_R_D_Ratnik_LAT_02_F"
-];
+arry_inf_call_help_vdv = [];
+{
+	arry_inf_call_help_vdv pushBack (configName _x)
+} forEach _arry_inf_call_help_vdv_not_redy;
 
 // from missions vehicle 
 //1
-tank_from_first_mission = "UK3CB_ADM_I_T55"; // танк который нужно уничтожить
+tank_from_first_mission = selectRandom hevy_vehicle_arry; // танк который нужно уничтожить(не менять)
 //2
-Heli_from_second_mission = "UK3CB_ADA_I_Mi_24V"; //вертолет который нужно уничтожить
+Heli_from_second_mission = selectRandom heli_vehecle_arry; //вертолет который нужно уничтожить(не менять)
 //3
-frendly_down_heli_from_third_mission = "rhs_mi28n_vvsc"; //подбитый вертолет
-side_frendly_pilots = EAST; //сторона пилотов которых нужно эвакуировать
-class_name_frendly_pilots = "SpecLib_O_R_D_Helipilot_F"; //класс неймы пилотов которых нужно эвакуировать
+frendly_down_heli_from_third_mission = "rhs_mi28n_vvsc"; //союзный подбитый вертолет
+side_frendly_pilots = side (selectRandom allPlayers); //сторона пилотов которых нужно эвакуировать(не менять)
+class_name_frendly_pilots = "rhs_pilot_combat_heli"; //класс неймы союзных пилотов которых нужно эвакуировать
 //4
-class_name_bespilotnik = "O_UAV_02_dynamicLoadout_F"; // класс нейм подбитого беспилотника
-class_neme_APC_four_missions = selectRandom hevy_vehicle_arry; // массив класс нейм техники которая будет атаковать игроков 
-class_neme_helicopter_four_missions = selectRandom heli_vehecle_arry; // массив класс нейм вертолетов которая будет атаковать игроков 
+class_name_bespilotnik = "O_UAV_02_dynamicLoadout_F"; // класс нейм подбитого беспилотника(не менять)
+class_neme_APC_four_missions = selectRandom hevy_vehicle_arry; // массив класс нейм техники которая будет атаковать игроков (не менять)
+class_neme_helicopter_four_missions = selectRandom heli_vehecle_arry; // массив класс нейм вертолетов которая будет атаковать игроков (не менять)
 //5 
-arry_class_name_vehicle_frendly = ["rhs_tigr_m_des", "rhs_btr80_des", "VTN_KAMAZ5350_DES", "VTN_KAMAZ6350_DES"];// массв техники побитой союзной колонны
+arry_class_name_vehicle_frendly = car_mission_arry;// массв техники побитой союзной колонны(не менять)
 //6
-class_name_heli_pidbity_six_mission = "Mi8Wreck"; // побитый вертолет
-class_nsme_box_to_destroy = "CargoNet_01_box_F"; // класс нейм обьектв который нужно эвакуировать на базу
+class_name_heli_pidbity_six_mission = "Mi8Wreck"; // союзный транспортный побитый вертолет
+class_nsme_box_to_destroy = "CargoNet_01_box_F"; // класс нейм обьектв который нужно эвакуировать на базу(не менять)
 //7
-class_name_artilery_to_destroy = "UK3CB_ADM_I_D30"; // класс нейм артилерии которую нужно уничтожить
+class_name_artilery_to_destroy = "UK3CB_AAF_I_D30"; // класс нейм артилерии которую нужно уничтожить
 //8 
-arry_class_name_vehicle_first_in_convoy = [
-	"UK3CB_ADM_I_BTR40_MG", 
-	"UK3CB_ADM_I_BRDM2"
-]; // класс нейм техники 1-й в колонне
-arry_class_name_vehicle_second_in_convoy = [
-	"UK3CB_ADM_I_MTLB_PKT"
-];
-arry_class_name_vehicle_third_in_convoy = [
-	"UK3CB_ADM_I_V3S_Zu23", 
-	"UK3CB_ADM_I_MTLB_ZU23"
-];
-arry_class_name_vehicle_four_in_convoy = [
-	"UK3CB_ADM_I_LR_Open", 
-	"UK3CB_ADM_I_V3S_Open"
-];
-arry_class_name_vehicle_five_in_convoy = [ 
-	"UK3CB_ADM_I_V3S_Zu23", 
-	"UK3CB_ADM_I_MTLB_ZU23"
-
-];
-arry_class_name_vehicle_six_in_convoy = [ 
-	"UK3CB_ADM_I_LR_SF_M2", 
-	"UK3CB_ADM_I_LR_AGS30", 
-	"UK3CB_ADM_I_BRDM2", 
-	"UK3CB_ADM_I_MTLB_PKT"
-];
+arry_class_name_vehicle_first_in_convoy = car_mission_arry; // класс нейм техники 1-й в колонне
+arry_class_name_vehicle_second_in_convoy = car_mission_arry;
+arry_class_name_vehicle_third_in_convoy = car_mission_arry;
+arry_class_name_vehicle_four_in_convoy = car_mission_arry;
+arry_class_name_vehicle_five_in_convoy = car_mission_arry;
+arry_class_name_vehicle_six_in_convoy = car_mission_arry;
 //9
-class_name_zenitka_who_deffend_city = "UK3CB_TKM_I_ZU23"; // класс нейм стационарных зениток для обороны города ботами
+class_name_zenitka_who_deffend_city = "UK3CB_AAF_I_ZU23"; // класс нейм стационарных зениток для обороны города ботами
 //10
 Class_name_stacionar_radar_to_destroy = "rhs_prv13"; //радар который нужно уничтожить
 //11
@@ -145,7 +55,7 @@ arry_class_names_zaloznic =
 ]; // класс неймы заложников которыъ нужно спасти
 //12
 arry_class_names_officer = [
-	"UK3CB_TKA_I_OFF"
+	"UK3CB_CHD_I_COM"
 ];
 //13
 arry_class_names_boats = [
@@ -153,3 +63,62 @@ arry_class_names_boats = [
 	"UK3CB_NAP_I_Fishing_Boat_SPG9", 
 	"UK3CB_NAP_I_Fishing_Boat_Zu23_front"
 ];
+
+// во что будет одет союзный десант(спецназ) обязательно должен быть ПАРАШУТ
+
+fnc_Eqvip_desant = {
+		params["_unit"];
+			comment "Remove existing items";
+			removeAllWeapons _unit;
+			removeAllItems _unit;
+			removeAllAssignedItems _unit;
+			removeUniform _unit;
+			removeVest _unit;
+			removeBackpack _unit;
+			removeHeadgear _unit;
+			removeGoggles _unit;
+
+			comment "Add weapons";
+			_unit addWeapon "rhs_weap_ak74mr";
+			_unit addPrimaryWeaponItem "rhs_acc_ak5";
+			_unit addPrimaryWeaponItem "rhs_acc_perst3_2dp_h";
+			_unit addPrimaryWeaponItem "rhsusf_acc_su230a";
+			_unit addPrimaryWeaponItem "rhs_30Rnd_545x39_7N22_AK";
+			_unit addPrimaryWeaponItem "rhs_acc_grip_rk6";
+			_unit addWeapon "rhs_weap_rpg26";
+			_unit addWeapon "rhs_weap_pya";
+			_unit addHandgunItem "rhs_mag_9x19_17";
+
+			comment "Add containers";
+			_unit forceAddUniform "TFN_L9_Gen3_fs_or_cb_NFlag_uniform";
+			_unit addVest "AK_LBT";
+			_unit addBackpack "B_Parachute";
+
+			comment "Add items to containers";
+			_unit addItemToUniform "ACE_IR_Strobe_Item";
+			_unit addItemToUniform "PiR_bint";
+			for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_Chemlight_HiRed";};
+			for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_Chemlight_IR";};
+			for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_Chemlight_HiWhite";};
+			_unit addItemToUniform "MS_Strobe_Mag_2";
+			for "_i" from 1 to 2 do {_unit addItemToVest "PiR_bint";};
+			for "_i" from 1 to 4 do {_unit addItemToVest "ACE_CableTie";};
+			for "_i" from 1 to 6 do {_unit addItemToVest "rhs_30Rnd_545x39_7N22_AK";};
+			for "_i" from 1 to 2 do {_unit addItemToVest "rhs_mag_rgd5";};
+			for "_i" from 1 to 2 do {_unit addItemToVest "rhs_mag_9x19_17";};
+			_unit addHeadgear "lshzmc2";
+			_unit addGoggles "YuEBalaklava2mc";
+
+			comment "Add items";
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ACE_Altimeter";
+			_unit linkItem "ItemRadio";
+			_unit linkItem "ItemGPS";
+			_unit linkItem "Louetta_PVS31A_2";
+
+			comment "Set identity";
+			[_unit,"WhiteHead_13","male02rus"] call BIS_fnc_setIdentity;
+};
+
+publicVariable "fnc_Eqvip_desant"

@@ -1,120 +1,46 @@
-// from spawner
+waitUntil{
+	sleep 1;
+	!isNil {Ready_enemy}
+};
 
-inf_missions_arry = 
-[
-	"gm_ge_army_squadleader_g36a1_p2a1_90_flk", 
-	"gm_ge_army_rifleman_g36a1_90_flk", 
-	"gm_ge_army_radioman_g36a1_90_flk", 
-	"gm_ge_army_engineer_g36a1_90_flk", 
-	"gm_ge_army_paratrooper_g36a1_90_flk", 
-	"gm_ge_army_marksman_g3a3_90_flk", 
-	"gm_ge_army_machinegunner_mg3_90_flk", 
-	"gm_ge_army_antitank_g36a1_pzf3_90_flk", 
-	"gm_ge_army_antiair_g36a1_fim43_90_flk", 
-	"gm_ge_army_grenadier_hk69a1_90_flk", 
-	"gm_ge_army_demolition_g36a1_90_flk"
-];
+// боты которые прилетают на поддержку игрока
 
-car_mission_arry = 
-[
-	"gm_ge_army_luchsa1", 
-	"gm_ge_army_luchsa2", 
-	"gm_ge_army_iltis_milan", 
-	"gm_ge_army_iltis_mg3",
-	"gm_ge_army_fuchsa0_reconnaissance"
-];
+_player_faction = ([] call BIS_fnc_getFactions select 182);
 
-hevy_vehicle_arry = 
-[
-	"gm_ge_army_marder1a1plus", 
-	"gm_ge_army_marder1a1a", 
-	"gm_ge_army_marder1a2", 
-	"gm_ge_army_Leopard1a1", 
-	"gm_ge_army_Leopard1a1a1", 
-	"gm_ge_army_Leopard1a1a2", 
-	"gm_ge_army_Leopard1a3", 
-	"gm_ge_army_Leopard1a3a1", 
-	"gm_ge_army_Leopard1a5"
-];
+_arry_inf_call_help_vdv_not_redy = "(getText (_x >> 'faction') == _player_faction) and (configName _x isKindOf ""Man"")" configClasses (configFile >> "CfgVehicles"); 
 
-anti_air_vehicle_arry = 
-[
-	"gm_ge_army_gepard1a1"
-];
-
-heli_vehecle_arry = 
-[
-	"gm_ge_army_bo105p_pah1a1", 
-	"gm_ge_army_bo105p_pah1"
-];
-
-static_weapon_arry = 
-[
-	"gm_ge_army_mg3_aatripod"
-];
-
-arry_inf_call_help_vdv =[
-	"SpecLib_O_R_S_Ratnik_AAT_F", 
-    "SpecLib_O_R_S_Ratnik_TL_F", 
-    "SpecLib_O_R_S_Ratnik_MG_F", 
-    "SpecLib_O_R_S_Ratnik_AR_F", 
-    "SpecLib_O_R_S_Ratnik_medic_F", 
-    "SpecLib_O_R_S_Ratnik_M_F", 
-    "SpecLib_O_R_S_Ratnik_GL_F", 
-    "SpecLib_O_R_S_Ratnik_LAT_01_F"
-];
+arry_inf_call_help_vdv = [];
+{
+	arry_inf_call_help_vdv pushBack (configName _x)
+} forEach _arry_inf_call_help_vdv_not_redy;
 
 // from missions vehicle 
 //1
-tank_from_first_mission = "gm_ge_army_Leopard1a5"; // танк который нужно уничтожить
+tank_from_first_mission = selectRandom hevy_vehicle_arry; // танк который нужно уничтожить(не менять)
 //2
-Heli_from_second_mission = "gm_ge_army_ch53gs"; //вертолет который нужно уничтожить
+Heli_from_second_mission = selectRandom heli_vehecle_arry; //вертолет который нужно уничтожить(не менять)
 //3
-frendly_down_heli_from_third_mission = "rhs_mi28n_vvsc"; //подбитый вертолет
-side_frendly_pilots = EAST; //сторона пилотов которых нужно эвакуировать
-class_name_frendly_pilots = "rhs_pilot_combat_heli"; //класс неймы пилотов которых нужно эвакуировать
+frendly_down_heli_from_third_mission = "rhs_mi28n_vvsc"; //союзный подбитый вертолет
+side_frendly_pilots = side (selectRandom allPlayers); //сторона пилотов которых нужно эвакуировать(не менять)
+class_name_frendly_pilots = "rhs_pilot_combat_heli"; //класс неймы союзных пилотов которых нужно эвакуировать
 //4
-class_name_bespilotnik = "O_UAV_02_dynamicLoadout_F"; // класс нейм подбитого беспилотника
-class_neme_APC_four_missions = selectRandom hevy_vehicle_arry; // массив класс нейм техники которая будет атаковать игроков 
-class_neme_helicopter_four_missions = selectRandom heli_vehecle_arry; // массив класс нейм вертолетов которая будет атаковать игроков 
+class_name_bespilotnik = "O_UAV_02_dynamicLoadout_F"; // класс нейм подбитого беспилотника(не менять)
+class_neme_APC_four_missions = selectRandom hevy_vehicle_arry; // массив класс нейм техники которая будет атаковать игроков (не менять)
+class_neme_helicopter_four_missions = selectRandom heli_vehecle_arry; // массив класс нейм вертолетов которая будет атаковать игроков (не менять)
 //5 
-arry_class_name_vehicle_frendly = ["rhs_btr80a_forest", "VTN_KAMAZ63501_TRANSPORT_FLR","rhs_tigr_sts_forest"];// массв техники побитой союзной колонны
+arry_class_name_vehicle_frendly = car_mission_arry;// массв техники побитой союзной колонны(не менять)
 //6
-class_name_heli_pidbity_six_mission = "Mi8Wreck"; // побитый вертолет
-class_nsme_box_to_destroy = "CargoNet_01_box_F"; // класс нейм обьектв который нужно эвакуировать на базу
+class_name_heli_pidbity_six_mission = "Mi8Wreck"; // союзный транспортный побитый вертолет
+class_nsme_box_to_destroy = "CargoNet_01_box_F"; // класс нейм обьектв который нужно эвакуировать на базу(не менять)
 //7
-class_name_artilery_to_destroy = "RHS_M119_WD"; // класс нейм артилерии которую нужно уничтожить
+class_name_artilery_to_destroy = "UK3CB_AAF_I_D30"; // класс нейм артилерии которую нужно уничтожить
 //8 
-arry_class_name_vehicle_first_in_convoy = [
-	"gm_ge_army_fuchsa0_reconnaissance", 
-	"gm_ge_army_m113a1g_apc"
-]; // класс нейм техники 1-й в колонне
-arry_class_name_vehicle_second_in_convoy = [
-	"gm_ge_army_m113a1g_command", 
-	"gm_ge_army_u1300l_firefighter",
-	"gm_ge_army_bibera0"
-];
-arry_class_name_vehicle_third_in_convoy = [
-	"gm_ge_army_kat1_451_reammo", 
-	"gm_ge_army_kat1_454_reammo", 
-	"gm_ge_army_kat1_463_mlrs", 
-	"gm_ge_army_m109g",
-	"gm_ge_army_bibera0"
-];
-arry_class_name_vehicle_four_in_convoy = [
-	"gm_ge_army_kat1_451_cargo", 
-	"gm_ge_army_u1300l_cargo" 
-];
-arry_class_name_vehicle_five_in_convoy = [ 
-	"gm_ge_army_m113a1g_apc_milan", 
-	"gm_ge_army_bpz2a0" 
-
-];
-arry_class_name_vehicle_six_in_convoy = [ 
-	"gm_ge_army_marder1a2", 
-	"gm_ge_army_marder1a1a", 
-	"gm_ge_army_marder1a1plus"
-];
+arry_class_name_vehicle_first_in_convoy = car_mission_arry; // класс нейм техники 1-й в колонне
+arry_class_name_vehicle_second_in_convoy = car_mission_arry;
+arry_class_name_vehicle_third_in_convoy = car_mission_arry;
+arry_class_name_vehicle_four_in_convoy = car_mission_arry;
+arry_class_name_vehicle_five_in_convoy = car_mission_arry;
+arry_class_name_vehicle_six_in_convoy = car_mission_arry;
 //9
 class_name_zenitka_who_deffend_city = "UK3CB_AAF_I_ZU23"; // класс нейм стационарных зениток для обороны города ботами
 //10
@@ -129,7 +55,7 @@ arry_class_names_zaloznic =
 ]; // класс неймы заложников которыъ нужно спасти
 //12
 arry_class_names_officer = [
-	"gm_ge_army_officer_p1_90_flk"
+	"UK3CB_CHD_I_COM"
 ];
 //13
 arry_class_names_boats = [
@@ -137,3 +63,62 @@ arry_class_names_boats = [
 	"UK3CB_NAP_I_Fishing_Boat_SPG9", 
 	"UK3CB_NAP_I_Fishing_Boat_Zu23_front"
 ];
+
+// во что будет одет союзный десант(спецназ) обязательно должен быть ПАРАШУТ
+
+fnc_Eqvip_desant = {
+		params["_unit"];
+			comment "Remove existing items";
+			removeAllWeapons _unit;
+			removeAllItems _unit;
+			removeAllAssignedItems _unit;
+			removeUniform _unit;
+			removeVest _unit;
+			removeBackpack _unit;
+			removeHeadgear _unit;
+			removeGoggles _unit;
+
+			comment "Add weapons";
+			_unit addWeapon "rhs_weap_ak74mr";
+			_unit addPrimaryWeaponItem "rhs_acc_ak5";
+			_unit addPrimaryWeaponItem "rhs_acc_perst3_2dp_h";
+			_unit addPrimaryWeaponItem "rhsusf_acc_su230a";
+			_unit addPrimaryWeaponItem "rhs_30Rnd_545x39_7N22_AK";
+			_unit addPrimaryWeaponItem "rhs_acc_grip_rk6";
+			_unit addWeapon "rhs_weap_rpg26";
+			_unit addWeapon "rhs_weap_pya";
+			_unit addHandgunItem "rhs_mag_9x19_17";
+
+			comment "Add containers";
+			_unit forceAddUniform "TFN_L9_Gen3_fs_or_cb_NFlag_uniform";
+			_unit addVest "AK_LBT";
+			_unit addBackpack "B_Parachute";
+
+			comment "Add items to containers";
+			_unit addItemToUniform "ACE_IR_Strobe_Item";
+			_unit addItemToUniform "PiR_bint";
+			for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_Chemlight_HiRed";};
+			for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_Chemlight_IR";};
+			for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_Chemlight_HiWhite";};
+			_unit addItemToUniform "MS_Strobe_Mag_2";
+			for "_i" from 1 to 2 do {_unit addItemToVest "PiR_bint";};
+			for "_i" from 1 to 4 do {_unit addItemToVest "ACE_CableTie";};
+			for "_i" from 1 to 6 do {_unit addItemToVest "rhs_30Rnd_545x39_7N22_AK";};
+			for "_i" from 1 to 2 do {_unit addItemToVest "rhs_mag_rgd5";};
+			for "_i" from 1 to 2 do {_unit addItemToVest "rhs_mag_9x19_17";};
+			_unit addHeadgear "lshzmc2";
+			_unit addGoggles "YuEBalaklava2mc";
+
+			comment "Add items";
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ACE_Altimeter";
+			_unit linkItem "ItemRadio";
+			_unit linkItem "ItemGPS";
+			_unit linkItem "Louetta_PVS31A_2";
+
+			comment "Set identity";
+			[_unit,"WhiteHead_13","male02rus"] call BIS_fnc_setIdentity;
+};
+
+publicVariable "fnc_Eqvip_desant"

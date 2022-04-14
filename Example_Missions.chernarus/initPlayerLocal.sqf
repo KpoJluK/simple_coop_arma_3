@@ -1,3 +1,31 @@
+player addEventHandler [
+	"Killed",
+	{
+		[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_saveInventory;
+
+		true
+	}
+];
+
+player addEventHandler [
+	"Respawn",
+	{	
+		player addAction ["<t color='#00ff22'>Меню игрока</t>",
+			"[] spawn{			
+				createDialog 'Dialog_Player_general';
+				waitUntil{
+					ctrlSetText [1908, str (sliderPosition 1900)]; 
+					ctrlSetText [1909, str (sliderPosition 1901)]; 
+					ctrlSetText [1910, str (sliderPosition 1902)]; 
+					!dialog
+				};
+			}"
+		];
+		[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_loadInventory;
+		true
+	}
+];
+
 If(serverCommandAvailable '#kick')then{
 	// *****
 	// EXTRACT FACTION DATA
@@ -120,7 +148,7 @@ If(serverCommandAvailable '#kick')then{
 	if!(side (selectRandom allPlayers) isEqualTo west)then{
 		[
 			Board_1,											// object the action is attached to
-			"<t color='#0008ff'>Противние синие</t>",										// Title of the action
+			"<t color='#0008ff'>Противник синие</t>",										// Title of the action
 			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Idle icon shown on screen
 			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Progress icon shown on screen
 			"_this distance _target < 3",						// Condition for the action to be shown
@@ -140,7 +168,7 @@ If(serverCommandAvailable '#kick')then{
 	if!(side (selectRandom allPlayers) isEqualTo EAST)then{
 		[
 			Board_1,											// object the action is attached to
-			"<t color='#ff0d00'>Противние Красные</t>",										// Title of the action
+			"<t color='#ff0d00'>Противник Красные</t>",										// Title of the action
 			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Idle icon shown on screen
 			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Progress icon shown on screen
 			"_this distance _target < 3",						// Condition for the action to be shown
@@ -160,7 +188,7 @@ If(serverCommandAvailable '#kick')then{
 	if!(side (selectRandom allPlayers) isEqualTo independent)then{
 		[
 			Board_1,											// object the action is attached to
-			"<t color='#00ff22'>Противние Зеленые</t>",										// Title of the action
+			"<t color='#00ff22'>Противник Зеленые</t>",										// Title of the action
 			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Idle icon shown on screen
 			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Progress icon shown on screen
 			"_this distance _target < 3",						// Condition for the action to be shown
@@ -398,7 +426,7 @@ Board_1 addAction ["<t color='#ff2e2e'>Забрать чёрный ящик с �
  }] remoteExec ['call',2];  
 "]; 
  
-Board_1 addAction ["<t color='#ff2e2e'>Уничтожить артелерию</t>", "  
+Board_1 addAction ["<t color='#ff2e2e'>Уничтожить артилерию</t>", "  
  [[], {  
   0 spawn{  
  private _nearbyLocations = nearestLocations [center_map, ['Name','NameCity','NameCityCapital','NameVillage'], radius_map]; 
@@ -491,7 +519,7 @@ Board_1 addAction ["<t color='#ff2e2e'>Захватить офицера</t>", "
 "]; 
  
  
-Board_1 addAction ["<t color='#ff2e2e'>Уничтожить образцы хим оружия</t>", "  
+Board_1 addAction ["<t color='#ff2e2e'>Уничтожить хим оружия</t>", "  
  [[], {  
  0 spawn{ 
   _nearbyLocations = nearestLocations [center_map, ['NameMarine'], radius_map];   
@@ -529,34 +557,6 @@ _action_call_air_deffense = ["TestAction_call_help","Запросить зачи
 _action_call_vdv_paradrop = ["TestAction_call_help","Запросить помощь ССО","",{[]execVM "Script\call_help_paradrop.sqf";},{true}] call ace_interact_menu_fnc_createAction; 
 [player, 1, ["ACE_SelfActions","TestMain"], _action_call_vdv_paradrop] call ace_interact_menu_fnc_addActionToObject;
 
-
-player addEventHandler [
-	"Killed",
-	{
-		[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_saveInventory;
-
-		true
-	}
-];
-
-player addEventHandler [
-	"Respawn",
-	{	
-		player addAction ["<t color='#00ff22'>Меню игрока</t>",
-			"[] spawn{			
-				createDialog 'Dialog_Player_general';
-				waitUntil{
-					ctrlSetText [1908, str (sliderPosition 1900)]; 
-					ctrlSetText [1909, str (sliderPosition 1901)]; 
-					ctrlSetText [1910, str (sliderPosition 1902)]; 
-					!dialog
-				};
-			}"
-		];
-		[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_loadInventory;
-		true
-	}
-];
 
 
 // save and load inventory
