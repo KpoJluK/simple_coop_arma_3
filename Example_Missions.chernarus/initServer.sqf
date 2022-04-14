@@ -1,3 +1,13 @@
+waitUntil{
+	sleep 1;
+	!isNil {Ready_enemy}
+};
+
+//add class names 
+[] execVM "class_names.sqf";
+
+sleep 10;
+
 teleport1 = false;
 publicVariable "teleport1";
 
@@ -18,8 +28,7 @@ pos_base = getMarkerPos "Pos_base";
     [60,90,120] // время за которое машина сгорит минимальное/среднее/максимальное (в сек) 
 ] execVM "Script\Vehicle_in_fire.sqf";
 
-//add class names 
-[] execVM "class_names.sqf";
+
 
 //				find pos from mission			//
 

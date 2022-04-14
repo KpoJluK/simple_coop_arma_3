@@ -2,70 +2,74 @@
 
 inf_missions_arry = 
 [
-	"UK3CB_ADM_O_AA", 
-	"UK3CB_ADM_O_AT", 
-	"UK3CB_ADM_O_AR", 
-	"UK3CB_ADM_O_ENG", 
-	"UK3CB_ADM_O_GL", 
-	"UK3CB_ADM_O_IED", 
-	"UK3CB_ADM_O_LAT", 
-	"UK3CB_ADM_O_MG", 
-	"UK3CB_ADM_O_MK", 
-	"UK3CB_ADM_O_MD", 
-	"UK3CB_ADM_O_RIF_1", 
-	"UK3CB_ADM_O_RIF_2", 
-	"UK3CB_ADM_O_SL", 
-	"UK3CB_ADM_O_SNI", 
-	"UK3CB_ADM_O_SPOT", 
-	"UK3CB_ADM_O_TL"
+	"UK3CB_ADM_I_AA", 
+	"UK3CB_ADM_I_AT", 
+	"UK3CB_ADM_I_AR", 
+	"UK3CB_ADM_I_ENG", 
+	"UK3CB_ADM_I_GL", 
+	"UK3CB_ADM_I_IED", 
+	"UK3CB_ADM_I_LAT", 
+	"UK3CB_ADM_I_MG", 
+	"UK3CB_ADM_I_MK", 
+	"UK3CB_ADM_I_MD", 
+	"UK3CB_ADM_I_RIF_1", 
+	"UK3CB_ADM_I_RIF_2", 
+	"UK3CB_ADM_I_SL", 
+	"UK3CB_ADM_I_SNI", 
+	"UK3CB_ADM_I_SPOT", 
+	"UK3CB_ADM_I_TL"
 ];
 
 car_mission_arry = 
 [
-	"UK3CB_ADM_O_BRDM2", 
-	"UK3CB_ADM_O_BRDM2_HQ", 
-	"UK3CB_ADM_O_Datsun_Pkm", 
-	"UK3CB_ADM_O_Hilux_GMG", 
-	"UK3CB_ADM_O_Hilux_Rocket_Arty", 
-	"UK3CB_ADM_O_Hilux_Dshkm", 
-	"UK3CB_ADM_O_Hilux_Pkm", 
-	"UK3CB_ADM_O_LR_AGS30", 
-	"UK3CB_ADM_O_LR_M2", 
-	"UK3CB_ADM_O_LR_SPG9", 
-	"UK3CB_ADM_O_LR_SF_AGS30", 
-	"UK3CB_ADM_O_LR_SF_M2", 
-	"UK3CB_ADM_O_Offroad_M2",
-	"UK3CB_ADM_O_BTR40_MG"
+	"UK3CB_ADM_I_BTR40_MG", 
+	"UK3CB_ADM_I_MTLB_PKT", 
+	"UK3CB_ADM_I_BRDM2", 
+	"UK3CB_ADM_I_BRDM2_HQ", 
+	"UK3CB_ADM_I_Datsun_Pkm", 
+	"UK3CB_ADM_I_Hilux_GMG", 
+	"UK3CB_ADM_I_Hilux_Rocket_Arty", 
+	"UK3CB_ADM_I_Hilux_Dshkm", 
+	"UK3CB_ADM_I_Hilux_Pkm", 
+	"UK3CB_ADM_I_Hilux_Spg9", 
+	"UK3CB_ADM_I_Hilux_Rocket", 
+	"UK3CB_ADM_I_Hilux_Zu23", 
+	"UK3CB_ADM_I_LR_AGS30", 
+	"UK3CB_ADM_I_LR_M2", 
+	"UK3CB_ADM_I_LR_SPG9", 
+	"UK3CB_ADM_I_LR_SF_AGS30", 
+	"UK3CB_ADM_I_LR_SF_M2", 
+	"UK3CB_ADM_I_Offroad_M2", 
+	"UK3CB_ADM_I_Pickup_DSHKM"
 ];
 
 hevy_vehicle_arry = 
 [
-	"UK3CB_ADM_O_MTLB_PKT", 
-	"UK3CB_ADM_O_T34", 
-	"UK3CB_ADM_O_T55"
+	"UK3CB_ADM_I_T34", 
+	"UK3CB_ADM_I_T55"
 ];
 
 anti_air_vehicle_arry = 
 [
-	"UK3CB_ADM_O_MTLB_ZU23", 
-	"UK3CB_ADM_O_V3S_Zu23"
+	"UK3CB_ADM_I_V3S_Zu23", 
+	"UK3CB_ADM_I_MTLB_ZU23", 
+	"UK3CB_ADM_I_Hilux_Zu23"
 ];
 
 heli_vehecle_arry = 
 [
-	"UK3CB_ADA_O_UH1H_M240", 
-	"UK3CB_ADA_O_UH1H_GUNSHIP", 
-	"UK3CB_ADA_O_Mi8AMTSh"
+	"UK3CB_ADA_I_UH1H_GUNSHIP", 
+	"UK3CB_ADA_I_UH1H_M240"
 ];
 
 static_weapon_arry = 
 [
-	"UK3CB_ADM_O_ZU23", 
-	"UK3CB_ADM_O_SPG9", 
-	"UK3CB_ADM_O_KORD_high", 
-	"UK3CB_ADM_O_DSHKM", 
-	"UK3CB_ADM_O_Igla_AA_pod", 
-	"UK3CB_ADM_O_2b14_82mm"
+	"UK3CB_ADM_I_2b14_82mm", 
+	"UK3CB_ADM_I_Igla_AA_pod", 
+	"UK3CB_ADM_I_AGS", 
+	"UK3CB_ADM_I_DSHKM", 
+	"UK3CB_ADM_I_KORD_high", 
+	"UK3CB_ADM_I_ZU23"
 ];
 
 arry_inf_call_help_vdv =[
@@ -82,9 +86,9 @@ arry_inf_call_help_vdv =[
 
 // from missions vehicle 
 //1
-tank_from_first_mission = "UK3CB_ADM_O_T55"; // танк который нужно уничтожить
+tank_from_first_mission = "UK3CB_ADM_I_T55"; // танк который нужно уничтожить
 //2
-Heli_from_second_mission = "UK3CB_ADA_O_Mi_24V"; //вертолет который нужно уничтожить
+Heli_from_second_mission = "UK3CB_ADA_I_Mi_24V"; //вертолет который нужно уничтожить
 //3
 frendly_down_heli_from_third_mission = "rhs_mi28n_vvsc"; //подбитый вертолет
 side_frendly_pilots = EAST; //сторона пилотов которых нужно эвакуировать
