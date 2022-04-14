@@ -278,15 +278,21 @@ If(serverCommandAvailable '#kick')then{
 	} forEach static_weapon_arry;
 
 
+	anti_air_vehicle_arry = [];
+	anti_air_vehicle_arry append hevy_vehicle_arry;
+	anti_air_vehicle_arry append car_mission_arry;
+
 	Ready_enemy = true;
 	publicVariable "Ready_enemy";
+
+	publicVariable "inf_missions_arry";
+	publicVariable "car_mission_arry";
+	publicVariable "hevy_vehicle_arry";
+	publicVariable "heli_vehecle_arry";
+	publicVariable "static_weapon_arry";
+	publicVariable "anti_air_vehicle_arry";
 };
 
-publicVariable "inf_missions_arry";
-publicVariable "car_mission_arry";
-publicVariable "hevy_vehicle_arry";
-publicVariable "heli_vehecle_arry";
-publicVariable "static_weapon_arry";
 
 waitUntil{
 	sleep 1;
