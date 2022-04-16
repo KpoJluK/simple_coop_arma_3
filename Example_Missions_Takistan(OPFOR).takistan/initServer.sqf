@@ -16,8 +16,7 @@
 teleport1 = false;
 publicVariable "teleport1";
 
-choise_mission = false;
-publicVariable "choise_mission";
+
 
 pos_base = getMarkerPos "Pos_base";
 
@@ -31,28 +30,27 @@ radius_map = sqrt 2 * axis_map;
 
 
 waitUntil{
-	sleep 1;
 	!isNil {Ready_enemy}
 };
 
 // script convoy
+if!(isNil (car_mission_arry select 0))then{
+	[] execVM "Script\enemy_patrol.sqf";
+};
 
-[] execVM "Script\enemy_patrol.sqf";
 
 //add class names 
 [] execVM "class_names.sqf";
-
-
-sleep 10;
-
-
-//[] execVM "Script\ambush.sqf";
 
 
 // init setConvoy
 
 [] execVM "Script\Convoy\ConvoyInit.sqf";
 
+//choise_mission = false;
+//publicVariable "choise_mission";
+
+//[] execVM "Script\ambush.sqf";
 
 
 

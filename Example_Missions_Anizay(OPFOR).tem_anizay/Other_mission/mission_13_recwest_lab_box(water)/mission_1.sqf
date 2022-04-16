@@ -20,19 +20,19 @@ publicVariable "kontainer_for_mission_rabbit";
 // create bmk
 _pos_mission set [2,0];
 
-private _lodka_1 = [_pos_mission, 180, selectRandom arry_class_names_boats, independent] call BIS_fnc_spawnVehicle;
+private _lodka_1 = [_pos_mission, 180, selectRandom arry_class_names_boats, enemy_side] call BIS_fnc_spawnVehicle;
 [group ((_lodka_1 select 1) select 0), getPos (_lodka_1 select 0), 200] call bis_fnc_taskPatrol;
 
 _pos_mission set [0,(_pos_mission select 0) + random [-100,0,100]];
 _pos_mission set [1,(_pos_mission select 1) + random [-100,0,100]];
 
-private _lodka_1 = [_pos_mission, 180, selectRandom arry_class_names_boats, independent] call BIS_fnc_spawnVehicle;
+private _lodka_1 = [_pos_mission, 180, selectRandom arry_class_names_boats, enemy_side] call BIS_fnc_spawnVehicle;
 [group ((_lodka_1 select 1) select 0), getPos (_lodka_1 select 0), 200] call bis_fnc_taskPatrol;
 
 _pos_mission set [0,(_pos_mission select 0) + random [-100,0,100]];
 _pos_mission set [1,(_pos_mission select 1) + random [-100,0,100]];
 
-private _lodka_1 = [_pos_mission, 180, selectRandom arry_class_names_boats, independent] call BIS_fnc_spawnVehicle;
+private _lodka_1 = [_pos_mission, 180, selectRandom arry_class_names_boats, enemy_side] call BIS_fnc_spawnVehicle;
 [group ((_lodka_1 select 1) select 0), getPos (_lodka_1 select 0), 200] call bis_fnc_taskPatrol;
 
 waitUntil{

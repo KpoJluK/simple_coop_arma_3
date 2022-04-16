@@ -16,7 +16,7 @@ private _Marker9 = createMarker ["Marker9", _pos_mission];
 [
 	_pos_mission,	// массив координатов где будет центр здания
 
-	independent,	// сторона ботов можнт быть: EAST, WEST, independent
+	enemy_side,	// сторона ботов можнт быть: EAST, WEST, enemy_side
 	inf_missions_arry,
 	car_mission_arry,
 	hevy_vehicle_arry,
@@ -53,9 +53,9 @@ private _find_pos_from_zenitki_2 = [_pos_mission, 10, 150, 10, 0, 0.9, 0] call B
 private _find_pos_from_vuhka = [_pos_mission, 50, 300, 10, 0, 0.9, 0] call BIS_fnc_findSafePos;
 
 //spawn zenitki
-zenitka_goroda = [_find_pos_from_zenitki, 180, class_name_zenitka_who_deffend_city, independent] call BIS_fnc_spawnVehicle;
-zenitka_goroda_1 = [_find_pos_from_zenitki_1, 180, class_name_zenitka_who_deffend_city, independent] call BIS_fnc_spawnVehicle;
-zenitka_goroda_2 = [_find_pos_from_zenitki_2, 180, class_name_zenitka_who_deffend_city, independent] call BIS_fnc_spawnVehicle;
+zenitka_goroda = [_find_pos_from_zenitki, 180, class_name_zenitka_who_deffend_city, enemy_side] call BIS_fnc_spawnVehicle;
+zenitka_goroda_1 = [_find_pos_from_zenitki_1, 180, class_name_zenitka_who_deffend_city, enemy_side] call BIS_fnc_spawnVehicle;
+zenitka_goroda_2 = [_find_pos_from_zenitki_2, 180, class_name_zenitka_who_deffend_city, enemy_side] call BIS_fnc_spawnVehicle;
 
 //bot from defend zenitki
 

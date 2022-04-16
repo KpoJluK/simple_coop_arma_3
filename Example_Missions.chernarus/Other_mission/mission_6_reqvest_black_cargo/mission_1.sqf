@@ -36,7 +36,7 @@ _smoke6 setPos(getPos _Plane_1);
 [
 	_Plane_1 getPos[50, random 360],	// массив координатов где будет центр здания
 
-	independent,	// сторона ботов можнт быть: EAST, WEST, independent
+	enemy_side,	// сторона ботов можнт быть: EAST, WEST, independent
 	inf_missions_arry,
 	car_mission_arry,
 	hevy_vehicle_arry,

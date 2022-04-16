@@ -57,17 +57,17 @@ deleteVehicle _car;
 
 
 //Vehicle
-private _BMP_delivery_explousion = [getmarkerPos "Pos_convoy_45", 180,selectRandom arry_class_name_vehicle_first_in_convoy, independent] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion = [getmarkerPos "Pos_convoy_45", 180,selectRandom arry_class_name_vehicle_first_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_2 = [getmarkerPos "Pos_convoy_40", 180,selectRandom arry_class_name_vehicle_second_in_convoy, independent] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_2 = [getmarkerPos "Pos_convoy_40", 180,selectRandom arry_class_name_vehicle_second_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_3 = [getmarkerPos "Pos_convoy_35", 180,selectRandom arry_class_name_vehicle_third_in_convoy, independent] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_3 = [getmarkerPos "Pos_convoy_35", 180,selectRandom arry_class_name_vehicle_third_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_4 = [getmarkerPos "Pos_convoy_20", 180,selectRandom arry_class_name_vehicle_four_in_convoy, independent] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_4 = [getmarkerPos "Pos_convoy_20", 180,selectRandom arry_class_name_vehicle_four_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_5 = [getmarkerPos "Pos_convoy_10", 180,selectRandom arry_class_name_vehicle_five_in_convoy, independent] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_5 = [getmarkerPos "Pos_convoy_10", 180,selectRandom arry_class_name_vehicle_five_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_6 = [getmarkerPos "Pos_convoy_0", 180,selectRandom arry_class_name_vehicle_six_in_convoy, independent] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_6 = [getmarkerPos "Pos_convoy_0", 180,selectRandom arry_class_name_vehicle_six_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
 arry_marker_pos deleteRange [0, 50];
 

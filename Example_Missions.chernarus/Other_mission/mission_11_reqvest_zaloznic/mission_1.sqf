@@ -55,7 +55,7 @@ if (_bilding_from_mission_general isEqualTo [])exitWith{hint"Не найдено
 
 
 // create bot terrorist
-private _group_terrorist = createGroup [independent, true];
+private _group_terrorist = createGroup [enemy_side, true];
 
 private _unit_1 = _group_terrorist createUnit [selectRandom _arry_class_name_terorist, _bilding_from_mission_general select 0, [], 0, "FORM"];
 
@@ -75,7 +75,7 @@ _pos_bot = getPos _nearestRoad;
 [
 	_pos_bot,	// массив координатов где будет центр здания
 
-	independent,	// сторона ботов можнт быть: EAST, WEST, independent
+	enemy_side,	// сторона ботов можнт быть: EAST, WEST, independent
 	inf_missions_arry,
 	car_mission_arry,
 	hevy_vehicle_arry,

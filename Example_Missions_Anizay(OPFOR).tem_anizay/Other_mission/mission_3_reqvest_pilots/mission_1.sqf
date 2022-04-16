@@ -44,7 +44,7 @@ private _find_pos_bot = _heli_down getPos [random 50, random 360];
 [
 	_find_pos_bot,	// массив координатов где будет центр здания
 
-	independent,	// сторона ботов можнт быть: EAST, WEST, independent
+	enemy_side,	// сторона ботов можнт быть: EAST, WEST, independent
 inf_missions_arry,
 car_mission_arry,
 hevy_vehicle_arry,
@@ -97,7 +97,7 @@ _pilot2 = _group_pilot createUnit [_pilot_classname, _second_mission, [], 0, "FO
 [
 	_second_mission,	// массив координатов где будет центр здания
 
-	independent,	// сторона ботов можнт быть: EAST, WEST, independent
+	enemy_side,	// сторона ботов можнт быть: EAST, WEST, independent
 	inf_missions_arry,
 	car_mission_arry,
 	hevy_vehicle_arry,

@@ -56,7 +56,7 @@ private _Marker7 = createMarker ["Marker7", _artilery_1 getPos [random 300, rand
 [
 	_artilery_1 getPos [30, random 360],	// массив координатов где будет центр здания
 
-	independent,	// сторона ботов можнт быть: EAST, WEST, independent
+	enemy_side,	// сторона ботов можнт быть: EAST, WEST, independent
 	inf_missions_arry,
 	car_mission_arry,
 	hevy_vehicle_arry,

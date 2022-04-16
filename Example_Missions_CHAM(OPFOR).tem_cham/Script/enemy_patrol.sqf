@@ -23,7 +23,7 @@ waitUntil{
 		private _locationPos = locationPosition _select_location;
 		private _pos_from_vehicle = [_locationPos, 100, 500, 15, 0, 0.7, 0] call BIS_fnc_findSafePos;
 		
-		private _vehicle = [_pos_from_vehicle, 180,_select_vehicle, independent] call BIS_fnc_spawnVehicle;
+		private _vehicle = [_pos_from_vehicle, 180,_select_vehicle, enemy_side] call BIS_fnc_spawnVehicle;
 		
 		for "_i" from 0 to ((_vehicle select 0) emptyPositions "cargo") - 1 do 
 		{
