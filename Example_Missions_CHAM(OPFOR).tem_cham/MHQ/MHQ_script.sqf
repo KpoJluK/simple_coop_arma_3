@@ -1,10 +1,8 @@
 
-// В модуль возрождения теники в параметр при возрождении- []call fnc_if_destroy_MHQ
-// В обьект для телепортирования - this addAction ["Teleport", "[]call fnc_teleport"];
-// Название кшм - MHQ_1
+// 
+// 
+// 
 
-
-// MHQ
 
 
 
@@ -79,13 +77,11 @@ fnc_romove_action_to_mhq = {
 fnc_teleport = {
 
 	if (teleport1)then{
-		[5, [], {
-		player setPos(MHQ_1 getPos [selectRandom [6,7,8,9],45]);
-		},
-		{["Перемещение отменено", true, 5, 2] call ace_common_fnc_displayText;
-		}, "Перемещение к КШМ"] call ace_common_fnc_progressBar;
-	}
-		else{["КШМ не развернута!", true, 5, 2] call ace_common_fnc_displayText;
+		player setPos(MHQ_1 getPos [selectRandom [6,8,10],random 360]);
+	}else{
+		hint"КШМ не развернута!";
+		sleep 5;
+		hint"";
 	};
 
 };

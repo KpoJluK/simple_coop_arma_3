@@ -34,8 +34,9 @@ waitUntil{
 };
 
 // script convoy
-if!(isNil (car_mission_arry select 0))then{
-	[] execVM "Script\enemy_patrol.sqf";
+
+if!((car_mission_arry select 0) isEqualTo str objNull)then{
+    [] execVM "Script\enemy_patrol.sqf";
 };
 
 
@@ -44,8 +45,9 @@ if!(isNil (car_mission_arry select 0))then{
 
 
 // init setConvoy
-
-[] execVM "Script\Convoy\ConvoyInit.sqf";
+if!((car_mission_arry select 0) isEqualTo str objNull)then{
+    [] execVM "Script\Convoy\ConvoyInit.sqf";
+};
 
 //choise_mission = false;
 //publicVariable "choise_mission";

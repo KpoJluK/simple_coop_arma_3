@@ -68,7 +68,7 @@ _action_call_vdv_paradrop = ["TestAction_call_help","Запросить помо
 	{ [player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_saveInventory; },				// Code executed on completion
 	{},													// Code executed on interrupted
 	[],													// Arguments passed to the scripts as _this select 3
-	3,													// action duration in seconds
+	1,													// action duration in seconds
 	0,													// priority
 	false,												// Remove on completion
 	false												// Show in unconscious state
@@ -86,7 +86,7 @@ _action_call_vdv_paradrop = ["TestAction_call_help","Запросить помо
 	{ [player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory; },				// Code executed on completion
 	{},													// Code executed on interrupted
 	[],													// Arguments passed to the scripts as _this select 3
-	3,													// action duration in seconds
+	1,													// action duration in seconds
 	0,													// priority
 	false,												// Remove on completion
 	false												// Show in unconscious state
@@ -104,7 +104,7 @@ _action_call_vdv_paradrop = ["TestAction_call_help","Запросить помо
 	{ [player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_saveInventory; },				// Code executed on completion
 	{},													// Code executed on interrupted
 	[],													// Arguments passed to the scripts as _this select 3
-	3,													// action duration in seconds
+	1,													// action duration in seconds
 	0,													// priority
 	false,												// Remove on completion
 	false												// Show in unconscious state
@@ -125,7 +125,7 @@ _action_call_vdv_paradrop = ["TestAction_call_help","Запросить помо
 	{ [player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory; },				// Code executed on completion
 	{},													// Code executed on interrupted
 	[],													// Arguments passed to the scripts as _this select 3
-	3,													// action duration in seconds
+	1,													// action duration in seconds
 	0,													// priority
 	false,												// Remove on completion
 	false												// Show in unconscious state
@@ -148,7 +148,7 @@ if(isClass (configFile >> "CfgPatches" >> "ace_main"))then{
 	{ [ammo_1, player] call ace_arsenal_fnc_openBox },				
 	{},													
 	[],													
-	1,													
+	0.5,													
 	0,													
 	false,												
 	false												
@@ -171,7 +171,7 @@ if(isClass (configFile >> "CfgPatches" >> "ace_main"))then{
 	{ [ammo_2, player] call ace_arsenal_fnc_openBox },				
 	{},													
 	[],													
-	1,													
+	0.5,													
 	0,													
 	false,												
 	false												
@@ -194,7 +194,7 @@ if(isClass (configFile >> "CfgPatches" >> "ace_main"))then{
 	{ ["Open",true] spawn BIS_fnc_arsenal },				
 	{},													
 	[],													
-	1,													
+	0.5,													
 	0,													
 	false,												
 	false												
@@ -213,7 +213,7 @@ if(isClass (configFile >> "CfgPatches" >> "ace_main"))then{
 	{ ["Open",true] spawn BIS_fnc_arsenal },				
 	{},													
 	[],													
-	1,													
+	0.5,													
 	0,													
 	false,												
 	false												

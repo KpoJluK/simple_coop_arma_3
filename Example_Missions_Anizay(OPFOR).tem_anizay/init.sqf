@@ -231,8 +231,15 @@ If(serverCommandAvailable '#kick')then{
 		car_mission_arry pushBack (configName _x)
 	} forEach _car_mission_arry_not_redy;
 
+	// visible car
 	{ 
 		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{car_mission_arry = car_mission_arry - [_x]}; 
+	} forEach car_mission_arry;
+
+	// have Turrets
+
+	{ 
+		if(((_x call BIS_fnc_allTurrets) select 0) isEqualTo [] )then{car_mission_arry = car_mission_arry - [_x]}; 
 	} forEach car_mission_arry;
 
 
@@ -261,6 +268,22 @@ If(serverCommandAvailable '#kick')then{
 	{ 
 		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{heli_vehecle_arry = heli_vehecle_arry - [_x]}; 
 	} forEach heli_vehecle_arry;
+
+
+	// anti air
+
+	anti_air_vehicle_arry = [];
+
+	{ 
+		private _subCategory = getText (configFile >> "CfgVehicles" >> _x >> "editorSubcategory");
+		if(["EdSubcat_AAs", _subCategory] call BIS_fnc_inString)then{anti_air_vehicle_arry = anti_air_vehicle_arry + [_x]};
+	} forEach car_mission_arry;
+
+	{ 
+		private _subCategory = getText (configFile >> "CfgVehicles" >> _x >> "editorSubcategory");
+		if(["EdSubcat_AAs", _subCategory] call BIS_fnc_inString)then{anti_air_vehicle_arry = anti_air_vehicle_arry + [_x]};
+	} forEach hevy_vehicle_arry;
+
 
 
 	//StaticWeapon
@@ -303,11 +326,14 @@ If(serverCommandAvailable '#kick')then{
 		static_weapon_arry append [str objNull];
 	};
 
-	anti_air_vehicle_arry = [];
-	anti_air_vehicle_arry append hevy_vehicle_arry;
-	anti_air_vehicle_arry append car_mission_arry;
+	// if no anti air
+	if(anti_air_vehicle_arry isEqualTo [])then{
+		anti_air_vehicle_arry append hevy_vehicle_arry;
+		anti_air_vehicle_arry append car_mission_arry;
+	};
 
-	if(isNil (car_mission_arry select 0))then{
+
+	if((car_mission_arry select 0) isEqualTo str objNull)then{
 	["ВНИМАНИЕ В ВЫБРАНОЙ ФАРКЦИИ ОТСУЦТВУЮТ КЛЮЧЕНЫЕ ЮНИТЫ ДЛЯ ЗАДАНИЙ! Некоторые задания НЕ БУДУТ РАБОТАТЬ КОРРЕКТНО! Выберете другую фракцию!!"] remoteExec ["hint"];
 	};
 
@@ -387,13 +413,13 @@ If(serverCommandAvailable '#kick')then{
 	_locationPos set [2,0]; 
 	pos_mision_4 = [_locationPos, 500, 1500, 20, 0, 0.5, 0] call BIS_fnc_findSafePos; 
 		[ 
-	pos_mision_4, 
-				class_name_bespilotnik, 
-				class_neme_APC_four_missions, 
-				class_neme_helicopter_four_missions, 
-				enemy_side, 
-				inf_missions_arry 
-			] execVM 'Other_mission\mission_4_find_bespilotnik\mission_1.sqf'; 
+			pos_mision_4, 
+			class_name_bespilotnik, 
+			class_neme_APC_four_missions, 
+			class_neme_helicopter_four_missions, 
+			enemy_side, 
+			inf_missions_arry 
+		] execVM 'Other_mission\mission_4_find_bespilotnik\mission_1.sqf'; 
 	};  
 	}] remoteExec ['call',2];  
 	"]; 
