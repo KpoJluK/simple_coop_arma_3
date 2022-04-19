@@ -213,13 +213,14 @@ If(serverCommandAvailable '#kick')then{
 	{
 		inf_missions_arry pushBack (configName _x)
 	} forEach _inf_missions_arry_not_redy;
-
-	_group_x = createGroup [enemy_side, false];  
-
+	// is visible
 	{
 		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{inf_missions_arry = inf_missions_arry - [_x]};
+	} forEach inf_missions_arry;
+	// is have weapon
+	{
+		if((getUnitLoadout _x select 0) isEqualTo [])then{inf_missions_arry = inf_missions_arry - [_x]};
 	} forEach inf_missions_arry; 
-
 	
 
 	//car

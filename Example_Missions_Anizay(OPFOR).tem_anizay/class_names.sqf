@@ -10,9 +10,18 @@ _player_faction = ([] call BIS_fnc_getFactions select 182);
 _arry_inf_call_help_vdv_not_redy = "(getText (_x >> 'faction') == _player_faction) and (configName _x isKindOf ""Man"")" configClasses (configFile >> "CfgVehicles"); 
 
 arry_inf_call_help_vdv = [];
+
 {
 	arry_inf_call_help_vdv pushBack (configName _x)
 } forEach _arry_inf_call_help_vdv_not_redy;
+
+{
+	if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{arry_inf_call_help_vdv = arry_inf_call_help_vdv - [_x]};
+} forEach arry_inf_call_help_vdv;
+
+{
+	if((getUnitLoadout _x select 0) isEqualTo [])then{arry_inf_call_help_vdv = arry_inf_call_help_vdv - [_x]};
+} forEach arry_inf_call_help_vdv; 
 
 // from missions vehicle 
 //1
@@ -56,7 +65,7 @@ arry_class_names_zaloznic =
 //12
 arry_class_names_officer = [
 	"UK3CB_CHD_I_COM"
-];
+]; //класс неймы офицеров которых нужно убить/захватить
 //13
 arry_class_names_boats = [
 	"UK3CB_NAP_I_Fishing_Boat_DSHKM", 

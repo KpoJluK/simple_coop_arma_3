@@ -128,7 +128,7 @@ _pilot2 = _group_pilot createUnit [_pilot_classname, _second_mission, [], 0, "FO
 //wait pilot delivery on base or hes die
 waitUntil{
 	sleep 10;
-	((getPos _pilot1) inArea [_pos_base_to_delivery, 100, 100, 0, false] or !alive _pilot1) && ((getPos _pilot2) inArea [getMarkerpos "Base", 100, 100, 0, false] or !alive _pilot2)
+	((getPos _pilot1) inArea [_pos_base_to_delivery, 100, 100, 0, false] or !alive _pilot1) && ((getPos _pilot2) inArea [_pos_base_to_delivery, 100, 100, 0, false] or !alive _pilot2)
  };
 //set task state
 if(alive _pilot1 and alive _pilot2)then{
