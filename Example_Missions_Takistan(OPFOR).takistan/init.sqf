@@ -547,7 +547,7 @@ If(serverCommandAvailable '#kick')then{
 	"]; 
 	
 	
-	Board_1 addAction ["<t color='#ff2e2e'>Уничтожить хим оружия</t>", "  
+	Board_1 addAction ["<t color='#ff2e2e'>Уничтожить хим оружие(На карте должен быть водоем!)</t>", "  
 	[[], {  
 	0 spawn{ 
 	_nearbyLocations = nearestLocations [center_map, ['NameMarine'], radius_map];   
@@ -563,6 +563,22 @@ If(serverCommandAvailable '#kick')then{
 	}; 
 	
 	}] remoteExec ['call',2];  
+	"]; 
+
+	Board_1 addAction ["<t color='#ff2e2e'>Обезвредить бомбу в населенном пункте</t>", "  
+	[[], {  
+	0 spawn{  
+	private _nearbyLocations = nearestLocations [center_map, ['Name','NameCity','NameCityCapital','NameVillage'], radius_map]; 
+	private _select_location = selectRandom _nearbyLocations; 
+	private _locationPos = locationPosition _select_location;
+	_find_road = [_locationPos, 500] call BIS_fnc_nearestRoad;
+	pos_mision_14 = getPos _find_road; 
+		[ 
+			pos_mision_14, 
+			3600
+		] execVM 'Other_mission\mission_14_defuse_bomb\mission_1.sqf'; 
+	};  
+	}] remoteExec ['call',2];
 	"]; 
 
 	};
