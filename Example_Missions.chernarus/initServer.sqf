@@ -49,6 +49,10 @@ if!((car_mission_arry select 0) isEqualTo str objNull)then{
     [] execVM "Script\Convoy\ConvoyInit.sqf";
 };
 
+// init bloc post
+[] execVM "Script\bloc_post.sqf";
+
+
 //choise_mission = false;
 //publicVariable "choise_mission";
 

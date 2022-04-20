@@ -10,9 +10,9 @@ waitUntil{
 	attack_bot_mission_4_true
 };
 
-private _group_bot_attac_dron = createGroup [EAST, true];
+private _group_bot_attac_dron = createGroup [_side_bot_to_attack, true];
 //find pos
-private _find_pos_from_bot = [getPos dron_down, 150, 200, 5, 0, 0.9, 0] call BIS_fnc_findSafePos;
+private _find_pos_from_bot = [getPos dron_down, 300, 500, 5, 0, 0.9, 0] call BIS_fnc_findSafePos;
 //find pos enemy heli
 private _find_pos_from_bot_air = [getPos dron_down, 1000, 1500, 20, 0, 0.7, 0] call BIS_fnc_findSafePos;
 //btr
@@ -28,9 +28,10 @@ private _wp_for_bot_go_tu_drone_heli = _heli_attac_drone select 2 addWaypoint [g
 _wp_for_bot_go_tu_drone_heli setWaypointType "GUARD";
 _wp_for_bot_go_tu_drone_heli setWaypointSpeed "FULL";
 //cyrcl from create bot
-for "_i" from 0 to 10 do 
+sleep 5;
+for "_i" from 0 to 10 * count allPlayers do 
 {
-	sleep 1;
+	sleep 0.5;
 	_unit = _group_bot_attac_dron createUnit [selectRandom _arry_bot_to_attac, _find_pos_from_bot, [], 0, "FORM"];
 };
 

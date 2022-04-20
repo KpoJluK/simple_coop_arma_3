@@ -240,7 +240,7 @@ If(serverCommandAvailable '#kick')then{
 	// have Turrets
 
 	{ 
-		if(((_x call BIS_fnc_allTurrets) select 0) isEqualTo [] )then{car_mission_arry = car_mission_arry - [_x]}; 
+		if((_x call BIS_fnc_allTurrets) isEqualTo [] )then{car_mission_arry = car_mission_arry - [_x]}; 
 	} forEach car_mission_arry;
 
 
@@ -317,7 +317,7 @@ If(serverCommandAvailable '#kick')then{
 
 	// if no heli_vehilce
 
-	if(hevy_vehicle_arry isEqualTo [])then{
+	if(heli_vehecle_arry isEqualTo [])then{
 		heli_vehecle_arry append [str objNull];
 	};
 
