@@ -1,0 +1,7 @@
+﻿#include "defines.hpp"
+#include "dialogs.hpp"
+
+respawn = "BASE";	
+respawnButton = 1;
+respawnDelay = 10;
+respawnTemplates[] = { "MenuPosition" };

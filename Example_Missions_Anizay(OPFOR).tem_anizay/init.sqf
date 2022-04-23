@@ -579,6 +579,33 @@ If(serverCommandAvailable '#kick')then{
 		] execVM 'Other_mission\mission_14_defuse_bomb\mission_1.sqf'; 
 	};  
 	}] remoteExec ['call',2];
+	"];
+
+	Board_1 addAction ["<t color='#ff2e2e'>Оказать помощь раненой важной особе</t>", "  
+	[[], {  
+	0 spawn{  
+	private _nearbyLocations = nearestLocations [center_map, ['Name','NameCity','NameCityCapital','NameVillage'], radius_map]; 
+	private _select_location = selectRandom _nearbyLocations; 
+	private _locationPos = locationPosition _select_location;
+	_find_road = [_locationPos, 500] call BIS_fnc_nearestRoad;
+	pos_mision_14 = getPos _find_road; 
+		[ 
+			pos_mision_14,
+			[
+				'C_Man_formal_1_F', 
+				'C_Man_formal_2_F', 
+				'C_Man_formal_3_F', 
+				'C_Man_formal_4_F', 
+				'C_Man_smart_casual_1_F', 
+				'C_Man_smart_casual_2_F'
+			],
+			[
+				'C_IDAP_Man_Paramedic_01_F',
+				'C_Man_Paramedic_01_F'
+			]
+		] execVM 'Other_mission\mission_15_help_man\mission_1.sqf'; 
+	};  
+	}] remoteExec ['call',2];
 	"]; 
 
 	};

@@ -58,7 +58,7 @@ bomb_1 = selectRandom[
 
 
 // create mission
-["Task_14", true, ["Обезвредить бомбу","Обезвредить бомбу","respawn_west"], _pos_mission, "CREATED", 5, true, true, "mine", true] call BIS_fnc_setTask;
+["Task_14", true, ["Вам нужно найти и обезвредить две бомбы, они находятся где то внутри маркера, найдите их до того как они взорвутся!","Обезвредить бомбы","respawn_west"], _pos_mission, "CREATED", 5, true, true, "mine", true] call BIS_fnc_setTask;
 ["До взрыва не более часа! Внимание если большенство домов будет разрушено миссия будет провалена!"] remoteExec ["hint"];
 // create marker
 private _Marker14 = createMarker ["Marker14", _pos_mission];
