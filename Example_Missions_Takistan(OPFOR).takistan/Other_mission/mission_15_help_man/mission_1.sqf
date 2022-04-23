@@ -70,9 +70,25 @@ _unit setCaptive true;
 
 _group_man_medic = createGroup [side (selectRandom allPlayers), false];
 
-_unit_medic = _group_man_medic createUnit [selectRandom _class_name_who_help_medic, pos_base, [], 0, "FORM"];
+unit_medic = _group_man_medic createUnit [selectRandom _class_name_who_help_medic, pos_base, [], 0, "FORM"];
 
-[_unit_medic] join (group(selectRandom allPlayers));
+[
+	unit_medic,											// object the action is attached to
+	"Давай за мной",										// Title of the action
+	"\a3\ui_f\data\igui\cfg\actions\getincommander_ca.paa",	// Idle icon shown on screen
+	"\a3\ui_f\data\igui\cfg\actions\getincommander_ca.paa",	// Progress icon shown on screen
+	"_this distance _target < 3",						// Condition for the action to be shown
+	"_caller distance _target < 3",						// Condition for the action to progress
+	{},													// Code executed when action starts
+	{},													// Code executed on every progress tick
+	{ [unit_medic] join (group player); [[], {removeAllActions unit_medic}] remoteExec ["call"]; },				// Code executed on completion
+	{},													// Code executed on interrupted
+	[],													// Arguments passed to the scripts as _this select 3
+	12,													// action duration in seconds
+	0,													// priority
+	true,												// Remove on completion
+	false												// Show in unconscious state
+] remoteExec ["BIS_fnc_holdActionAdd", 0, unit_medic];	// MP compatible implementation
 
 // create mission
 
@@ -80,29 +96,29 @@ _unit_medic = _group_man_medic createUnit [selectRandom _class_name_who_help_med
 
 waitUntil{
 	sleep 5;
-	!alive _unit_medic or !alive _unit or getPos _unit_medic inArea [getPos _unit, 20, 20, 45, false]
+	!alive unit_medic or !alive _unit or getPos unit_medic inArea [getPos _unit, 20, 20, 45, false]
 };
 
-if(!alive _unit_medic or !alive _unit)exitWith{
+if(!alive unit_medic or !alive _unit)exitWith{
 	["Task_15","FAILED"] call BIS_fnc_taskSetState;
 	sleep 10; 
 	["Task_15"] call BIS_fnc_deleteTask;
-	deleteVehicle _unit_medic;
+	deleteVehicle unit_medic;
 	deleteVehicle _unit;
 	deleteGroup _group_man_medic;
 };
 
-_unit_medic disableAI "all";
+unit_medic disableAI "all";
 
-_unit_medic attachTo [_unit, [0, -1, 0]];
+unit_medic attachTo [_unit, [0, -1, 0]];
 
-_vector = (getPos _unit_medic) vectorFromTo (getPos _unit);  
-_unit_medic setVectorDir _vector;
+_vector = (getPos unit_medic) vectorFromTo (getPos _unit);  
+unit_medic setVectorDir _vector;
  
-_unit_medic switchMove "AinvPknlMstpSnonWnonDnon_medic3";
-_unit_medic addEventHandler ["AnimDone", {
+unit_medic switchMove "AinvPknlMstpSnonWnonDnon_medic3";
+unit_medic addEventHandler ["AnimDone", {
 	params ["_unit", "_anim"];
-	_unit_medic switchMove "Acts_CivilInjuredGeneral_1";
+	unit_medic switchMove "Acts_CivilInjuredGeneral_1";
 }];
 
 ["Task_15","SUCCEEDED"] call BIS_fnc_taskSetState;
@@ -246,7 +262,7 @@ private _time = 0;
 waitUntil{
 	sleep 5;
 	_time = _time + 5;
-	!alive _unit_medic or !alive _unit or  _time == 600
+	!alive unit_medic or !alive _unit or  _time == 600
 };
 
 ["Task_15_1","SUCCEEDED"] call BIS_fnc_taskSetState;
@@ -268,7 +284,7 @@ if( !alive _unit)exitWith{
 	["Task_15_1"] call BIS_fnc_deleteTask;
 	["Task_15_2"] call BIS_fnc_deleteTask;
 	deleteVehicle _unit;
-	deleteVehicle _unit_medic;
+	deleteVehicle unit_medic;
 	deleteGroup _group_man_medic;
 	sleep 300;
 	{
@@ -284,7 +300,7 @@ sleep 10;
 ["Task_15_1"] call BIS_fnc_deleteTask;
 ["Task_15_2"] call BIS_fnc_deleteTask;
 deleteVehicle _unit;
-deleteVehicle _unit_medic;
+deleteVehicle unit_medic;
 deleteGroup _group_man_medic;
 sleep 300;
 {
