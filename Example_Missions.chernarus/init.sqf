@@ -19,9 +19,9 @@ If(serverCommandAvailable '#kick')then{
 	_factionsWithNoInf = [];
 	_factionsWithUnitsFiltered = [];
 
-	_West_side = [];
-	_East_side = [];
-	_enemy_side_side = [];
+	West_side = [];
+	East_side = [];
+	Independent_side = [];
 
 
 	// Record all factions with valid vehicles
@@ -104,98 +104,55 @@ If(serverCommandAvailable '#kick')then{
 
 	for "_i" from 0 to (count _availableFactionsData - 1) do 
 	{
-		if(((_availableFactionsData select _i) select 3) == 1)then{_West_side pushBack (_availableFactionsData select _i)}
+		if(((_availableFactionsData select _i) select 3) == 1)then{West_side pushBack (_availableFactionsData select _i)}
 	};
 
 	// east
 
 	for "_i" from 0 to (count _availableFactionsData - 1) do 
 	{
-		if(((_availableFactionsData select _i) select 3) == 0)then{_East_side pushBack (_availableFactionsData select _i)}
+		if(((_availableFactionsData select _i) select 3) == 0)then{East_side pushBack (_availableFactionsData select _i)}
 	};
 
 	// enemy_side
 
 	for "_i" from 0 to (count _availableFactionsData - 1) do 
 	{
-		if(((_availableFactionsData select _i) select 3) == 2)then{_enemy_side_side pushBack (_availableFactionsData select _i)}
+		if(((_availableFactionsData select _i) select 3) == 2)then{Independent_side pushBack (_availableFactionsData select _i)}
 	};
 	waitUntil{
 		alive player
 	};
 	// add action
+
+
 	if!(side (selectRandom allPlayers) isEqualTo west)then{
-		[
-			Board_1,											// object the action is attached to
-			"<t color='#0008ff'>Противник синие</t>",										// Title of the action
-			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Idle icon shown on screen
-			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Progress icon shown on screen
-			"_this distance _target < 3",						// Condition for the action to be shown
-			"_caller distance _target < 3",						// Condition for the action to progress
-			{},													// Code executed when action starts
-			{},													// Code executed on every progress tick
-			{   side_enemy_select = (_this select 3)select 0;enemy_side =  west; publicVariable "enemy_side"},				// Code executed on completion
-			{},													// Code executed on interrupted
-			[_West_side],													// Arguments passed to the scripts as _this select 3
-			5,													// action duration in seconds
-			0,													// priority
-			true,												// Remove on completion
-			false												// Show in unconscious state
-		] call BIS_fnc_holdActionAdd;	// MP compatible implementation
+		{
+
+			private _action = Board_1 addAction [format ["<t color='#2e85ff'>%1</t>",((West_side select _forEachIndex) select 1)], {enemy_fraction = (West_side select (_this select 3));enemy_side = WEST; publicVariable "enemy_side";},_forEachIndex];
+			Board_1 setUserActionText [_action , format ["<t color='#2e85ff'>%1</t>",((West_side select _forEachIndex) select 1)], format ["<img size='4' image='%1'/>", ((West_side select _forEachIndex) select 2)]];
+			
+		} forEach West_side;
 	};
 
 	if!(side (selectRandom allPlayers) isEqualTo EAST)then{
-		[
-			Board_1,											// object the action is attached to
-			"<t color='#ff0d00'>Противник Красные</t>",										// Title of the action
-			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Idle icon shown on screen
-			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Progress icon shown on screen
-			"_this distance _target < 3",						// Condition for the action to be shown
-			"_caller distance _target < 3",						// Condition for the action to progress
-			{},													// Code executed when action starts
-			{},													// Code executed on every progress tick
-			{ side_enemy_select = (_this select 3)select 0;enemy_side = EAST; publicVariable "enemy_side"  },				// Code executed on completion
-			{},													// Code executed on interrupted
-			[_East_side],													// Arguments passed to the scripts as _this select 3
-			5,													// action duration in seconds
-			0,													// priority
-			true,												// Remove on completion
-			false												// Show in unconscious state
-		] call BIS_fnc_holdActionAdd;	// MP compatible implementation
+		{
+
+			private _action = Board_1 addAction [format ["<t color='#ff0d00'>%1</t>",((East_side select _forEachIndex) select 1)], {enemy_fraction = (East_side select (_this select 3));enemy_side = EAST; publicVariable "enemy_side";},_forEachIndex];
+			Board_1 setUserActionText [_action , format ["<t color='#ff0d00'>%1</t>",((East_side select _forEachIndex) select 1)], format ["<img size='4' image='%1'/>", ((East_side select _forEachIndex) select 2)]];
+			
+		} forEach East_side;
 	};
 
 	if!(side (selectRandom allPlayers) isEqualTo independent)then{
-		[
-			Board_1,											// object the action is attached to
-			"<t color='#00ff22'>Противник Зеленые</t>",										// Title of the action
-			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Idle icon shown on screen
-			"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	// Progress icon shown on screen
-			"_this distance _target < 3",						// Condition for the action to be shown
-			"_caller distance _target < 3",						// Condition for the action to progress
-			{},													// Code executed when action starts
-			{},													// Code executed on every progress tick
-			{ side_enemy_select = (_this select 3)select 0;enemy_side = independent; publicVariable "enemy_side" },				// Code executed on completion
-			{},													// Code executed on interrupted
-			[_enemy_side_side],													// Arguments passed to the scripts as _this select 3
-			5,													// action duration in seconds
-			0,													// priority
-			true,												// Remove on completion
-			false												// Show in unconscious state
-		] call BIS_fnc_holdActionAdd;	// MP compatible implementation
+		{
+
+			private _action = Board_1 addAction [format ["<t color='#57ff24'>%1</t>",((Independent_side select _forEachIndex) select 1)], {enemy_fraction = (Independent_side select (_this select 3));enemy_side = independent; publicVariable "enemy_side";},_forEachIndex];
+			Board_1 setUserActionText [_action , format ["<t color='#57ff24'>%1</t>",((Independent_side select _forEachIndex) select 1)], format ["<img size='4' image='%1'/>", ((Independent_side select _forEachIndex) select 2)]];
+			
+		} forEach Independent_side;
 	};
 
-	waitUntil{
-		!isNil{side_enemy_select}
-	};
-
-	removeAllActions Board_1;
-
-	{
-
-		private _action = Board_1 addAction [((side_enemy_select select _forEachIndex) select 1), {enemy_fraction = (side_enemy_select select (_this select 3))},_forEachIndex];
-		Board_1 setUserActionText [_action , ((side_enemy_select select _forEachIndex) select 1), format ["<img size='4' image='%1'/>", ((side_enemy_select select _forEachIndex) select 2)]];
-		
-	} forEach side_enemy_select;
 
 	waitUntil{
 		!isNil{enemy_fraction}

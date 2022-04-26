@@ -23,11 +23,12 @@ _pos_mission distance randomLoacation_1 > 4000
 };
 
 arry_marker_pos = [];
+_arry_marker_pos_fom_delete = [];
 
 // find path
 private _agent = createAgent [typeOf player, getPos _nearestRoad, [], 0, "NONE"];
 private _car = "B_Quadbike_01_F" createVehicle getPos _nearestRoad;
-_car forceFollowRoad true;
+_agent forceFollowRoad true;
 _agent moveInDriver _car;
 _agent addEventHandler ["PathCalculated",
 { 
@@ -37,6 +38,7 @@ _agent addEventHandler ["PathCalculated",
 			_marker setMarkerType "mil_dot";
 			_marker setMarkerAlpha 0.5;
 			arry_marker_pos pushBack _marker;
+			_arry_marker_pos_fom_delete pushBack _marker;
 			};
 		
 	} 
@@ -50,53 +52,96 @@ sleep 5;
 deleteVehicle _agent;
 deleteVehicle _car;
 
+// hide marker
+
+for "_i" from 0 to 49 do 
+{
+	(arry_marker_pos select _i) setMarkerAlpha 0;
+};
+
+
 
 //task
 ["Task_08", true, ["Уничтожить технику пока она не добралась до места назначения","Уничтожить технику пока она не добралась до места назначения","respawn_west"], getmarkerPos "Pos_convoy_45", "CREATED", 5, true, true, "kill", true] call BIS_fnc_setTask;
 
+_arry_vehicle_convoy = [];
+
+_arry_vehicle_convoy append car_mission_arry;
+
+if!((hevy_vehicle_arry select 0) isEqualTo str objNull)then{
+
+	_arry_vehicle_convoy append hevy_vehicle_arry;
+
+};
 
 
 //Vehicle
-private _BMP_delivery_explousion = [getmarkerPos "Pos_convoy_45", 180,selectRandom arry_class_name_vehicle_first_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion = [getmarkerPos "Pos_convoy_45", 180,selectRandom car_mission_arry, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_2 = [getmarkerPos "Pos_convoy_40", 180,selectRandom arry_class_name_vehicle_second_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_2 = [getmarkerPos "Pos_convoy_40", 180,selectRandom _arry_vehicle_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_3 = [getmarkerPos "Pos_convoy_35", 180,selectRandom arry_class_name_vehicle_third_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_3 = [getmarkerPos "Pos_convoy_35", 180,selectRandom _arry_vehicle_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_4 = [getmarkerPos "Pos_convoy_20", 180,selectRandom arry_class_name_vehicle_four_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_4 = [getmarkerPos "Pos_convoy_20", 180,selectRandom _arry_vehicle_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_5 = [getmarkerPos "Pos_convoy_10", 180,selectRandom arry_class_name_vehicle_five_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_5 = [getmarkerPos "Pos_convoy_10", 180,selectRandom _arry_vehicle_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
-private _BMP_delivery_explousion_6 = [getmarkerPos "Pos_convoy_0", 180,selectRandom arry_class_name_vehicle_six_in_convoy, enemy_side] call BIS_fnc_spawnVehicle;
+private _BMP_delivery_explousion_6 = [getmarkerPos "Pos_convoy_0", 180,selectRandom _arry_vehicle_convoy, enemy_side] call BIS_fnc_spawnVehicle;
 
 arry_marker_pos deleteRange [0, 50];
+
+/*
+for "_i" from 0 to ((_BMP_delivery_explousion select 0) emptyPositions "cargo") - 1 do 
+{
+	_unit = group ((_BMP_delivery_explousion select 1)select 0) createUnit [selectRandom inf_missions_arry, [0,0,0], [], 0, "FORM"];
+	_unit moveInCargo (_BMP_delivery_explousion select 0);
+};
 
 for "_i" from 0 to ((_BMP_delivery_explousion_2 select 0) emptyPositions "cargo") - 1 do 
 {
 	_unit = group ((_BMP_delivery_explousion_2 select 1)select 0) createUnit [selectRandom inf_missions_arry, [0,0,0], [], 0, "FORM"];
-	_unit moveInAny (_BMP_delivery_explousion_2 select 0);
+	_unit moveInCargo (_BMP_delivery_explousion_2 select 0);
+};
+
+for "_i" from 0 to ((_BMP_delivery_explousion_3 select 0) emptyPositions "cargo") - 1 do 
+{
+	_unit = group ((_BMP_delivery_explousion_3 select 1)select 0) createUnit [selectRandom inf_missions_arry, [0,0,0], [], 0, "FORM"];
+	_unit moveInCargo (_BMP_delivery_explousion_3 select 0);
 };
 
 for "_i" from 0 to ((_BMP_delivery_explousion_4 select 0) emptyPositions "cargo") - 1 do 
 {
 	_unit = group ((_BMP_delivery_explousion_4 select 1)select 0) createUnit [selectRandom inf_missions_arry, [0,0,0], [], 0, "FORM"];
-	_unit moveInAny (_BMP_delivery_explousion_4 select 0);
+	_unit moveInCargo (_BMP_delivery_explousion_4 select 0);
 };
+
+for "_i" from 0 to ((_BMP_delivery_explousion_5 select 0) emptyPositions "cargo") - 1 do 
+{
+	_unit = group ((_BMP_delivery_explousion_5 select 1)select 0) createUnit [selectRandom inf_missions_arry, [0,0,0], [], 0, "FORM"];
+	_unit moveInCargo (_BMP_delivery_explousion_5 select 0);
+};
+
+for "_i" from 0 to ((_BMP_delivery_explousion_6 select 0) emptyPositions "cargo") - 1 do 
+{
+	_unit = group ((_BMP_delivery_explousion_6 select 1)select 0) createUnit [selectRandom inf_missions_arry, [0,0,0], [], 0, "FORM"];
+	_unit moveInCargo (_BMP_delivery_explousion_6 select 0);
+};
+*/
 
 // script convoy
 _handle = [ 
- arry_marker_pos, 
- [(_BMP_delivery_explousion select 0), 
- (_BMP_delivery_explousion_2 select 0),
- (_BMP_delivery_explousion_3 select 0),
- (_BMP_delivery_explousion_4 select 0),
- (_BMP_delivery_explousion_5 select 0),
- (_BMP_delivery_explousion_6 select 0)],
- 40, 
- 500, 
- 2, 
- "NORMAL", 
- "CARELESS" 
+	arry_marker_pos, 
+	[(_BMP_delivery_explousion select 0), 
+	(_BMP_delivery_explousion_2 select 0),
+	(_BMP_delivery_explousion_3 select 0),
+	(_BMP_delivery_explousion_4 select 0),
+	(_BMP_delivery_explousion_5 select 0),
+	(_BMP_delivery_explousion_6 select 0)],
+	40, 
+	500, 
+	2, 
+	"NORMAL", 
+	"CARELESS" 
 ] spawn DEVAS_ConvoyMove;
 
 //marker from start
@@ -122,18 +167,26 @@ waitUntil{
 	    !alive (_BMP_delivery_explousion_5 select 0) and
 		 !alive (_BMP_delivery_explousion_6 select 0)) or 
 		 getPos (_BMP_delivery_explousion select 0) inArea [nearestRoad_1, 100, 100, 0, false] or
-		  getPos (_BMP_delivery_explousion select 0) inArea [nearestRoad_1, 100, 100, 0, false] or
-		   getPos (_BMP_delivery_explousion select 0) inArea [nearestRoad_1, 100, 100, 0, false] or
-		    getPos (_BMP_delivery_explousion select 0) inArea [nearestRoad_1, 100, 100, 0, false] or
-			 getPos (_BMP_delivery_explousion select 0) inArea [nearestRoad_1, 100, 100, 0, false] or
-			  getPos (_BMP_delivery_explousion select 0) inArea [nearestRoad_1, 100, 100, 0, false]
+		  getPos (_BMP_delivery_explousion_2 select 0) inArea [nearestRoad_1, 100, 100, 0, false] or
+		   getPos (_BMP_delivery_explousion_3 select 0) inArea [nearestRoad_1, 100, 100, 0, false] or
+		    getPos (_BMP_delivery_explousion_4 select 0) inArea [nearestRoad_1, 100, 100, 0, false] or
+			 getPos (_BMP_delivery_explousion_5 select 0) inArea [nearestRoad_1, 100, 100, 0, false] or
+			  getPos (_BMP_delivery_explousion_6 select 0) inArea [nearestRoad_1, 100, 100, 0, false]
 };
 
 // if alive BMP
-if(!alive (_BMP_delivery_explousion select 0))then{
+if(!alive (_BMP_delivery_explousion select 0) and
+	 !alive (_BMP_delivery_explousion_2 select 0) and
+	  !alive (_BMP_delivery_explousion_3 select 0) and
+	   !alive (_BMP_delivery_explousion_4 select 0) and
+	    !alive (_BMP_delivery_explousion_5 select 0) and
+		 !alive (_BMP_delivery_explousion_6 select 0))then{
 ["Task_08","SUCCEEDED"] call BIS_fnc_taskSetState;
 deleteMarker _Marker8_1;
 deleteMarker _Marker8;
+{
+	deleteMarker _x
+} forEach _arry_marker_pos_fom_delete;
 sleep 10;
 ["Task_08"] call BIS_fnc_deleteTask;
 choise_mission = false;
@@ -141,20 +194,16 @@ publicVariable "choise_mission";
 };
 
 //if bmp deliver to marker
-if((getPos (_BMP_delivery_explousion select 0)) inArea [nearestRoad_1, 100, 100, 0, false]) then{
-["Task_08","SUCCEEDED"] call BIS_fnc_taskSetState;
+
+["Task_08","FAILED"] call BIS_fnc_taskSetState;
 deleteMarker _Marker8_1;
 deleteMarker _Marker8;
+{
+	deleteMarker _x
+} forEach _arry_marker_pos_fom_delete;
 sleep 10;
 ["Task_08"] call BIS_fnc_deleteTask;
-deleteVehicle (_BMP_delivery_explousion select 0);
-{(_BMP_delivery_explousion select 0) deleteVehicleCrew _x} foreach crew (_BMP_delivery_explousion select 0);
-deleteVehicle (_BMP_delivery_explousion_1 select 0);
-{(_BMP_delivery_explousion_1 select 0) deleteVehicleCrew _x} foreach crew (_BMP_delivery_explousion_1 select 0);
-
-
 choise_mission = false;
 publicVariable "choise_mission";
-};
 
 

@@ -43,13 +43,6 @@ class_name_heli_pidbity_six_mission = "Mi8Wreck"; // союзный трансп
 class_nsme_box_to_destroy = "CargoNet_01_box_F"; // класс нейм обьектв который нужно эвакуировать на базу(не менять)
 //7
 class_name_artilery_to_destroy = "UK3CB_AAF_I_D30"; // класс нейм артилерии которую нужно уничтожить
-//8 
-arry_class_name_vehicle_first_in_convoy = car_mission_arry; // класс нейм техники 1-й в колонне
-arry_class_name_vehicle_second_in_convoy = car_mission_arry;
-arry_class_name_vehicle_third_in_convoy = car_mission_arry;
-arry_class_name_vehicle_four_in_convoy = car_mission_arry;
-arry_class_name_vehicle_five_in_convoy = car_mission_arry;
-arry_class_name_vehicle_six_in_convoy = car_mission_arry;
 //9
 class_name_zenitka_who_deffend_city = "UK3CB_AAF_I_ZU23"; // класс нейм стационарных зениток для обороны города ботами
 //10

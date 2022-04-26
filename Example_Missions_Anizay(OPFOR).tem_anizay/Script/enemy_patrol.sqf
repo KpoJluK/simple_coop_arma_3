@@ -7,7 +7,10 @@ _list_road = center_map nearRoads radius_map;
 // цыкл создания техники
 Stot_patrol = true;
 // функция поиска дороги
-private _nearbyLocations = nearestLocations [center_map, ['Name','NameCity','NameCityCapital','NameVillage'], radius_map]; 
+private _nearbyLocations = nearestLocations [center_map, ['Name','NameCity','NameCityCapital','NameVillage'], radius_map];
+{
+	If((getPos _x) inArea [pos_base, 1500, 1500, 45, false])then{_nearbyLocations = _nearbyLocations - [_x]};
+} forEach _nearbyLocations;
 
 
 waitUntil{

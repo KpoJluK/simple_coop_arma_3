@@ -265,6 +265,9 @@ waitUntil{
 	!alive unit_medic or !alive _unit or  _time == 600
 };
 
+_unit switchMove "";
+unit_medic switchMove "";
+
 ["Task_15_1","SUCCEEDED"] call BIS_fnc_taskSetState;
 
 sleep 5;

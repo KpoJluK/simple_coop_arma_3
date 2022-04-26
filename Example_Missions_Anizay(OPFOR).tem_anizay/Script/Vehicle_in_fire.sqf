@@ -1,4 +1,4 @@
- /*
+/*
 [
     true, // будут ли возгоратся машины (true - да false - нет)
     true,   // будут ли возгоратся Танки/БПМ (true - да false - нет)
@@ -23,7 +23,7 @@ _arry_type_vehilce = [];
 
 if(_car_burn isEqualTo true)then{_arry_type_vehilce append ["Car","Motorcycle"]};
 if(_Tank_burn isEqualTo true)then{_arry_type_vehilce append ["Tank"]};
-if(_Air_burn isEqualTo true)then{_arry_type_vehilce append []};
+if(_Air_burn isEqualTo true)then{_arry_type_vehilce append ["Air"]};
 
 
 // arry vehicle in fire
@@ -33,7 +33,7 @@ if(isNil "STOP_burning_vehicle_car")then{STOP_burning_vehicle_car = true};
 
 while {STOP_burning_vehicle_car} do {
     // all vehicle
-    _vehicle = entities [_arry_type_vehilce, [], false, true];
+    _vehicle = entities [_arry_type_vehilce, [], false, true];;
         { if(_x getHitPointDamage "hitEngine" >= 0.91) then{
             if(_x in vehicle_on_fire or !alive _x)exitWith{};
             vehicle_on_fire pushBack _x;
@@ -50,7 +50,7 @@ while {STOP_burning_vehicle_car} do {
                     {},													// Code executed when action starts
                     {},													// Code executed on every progress tick
                     {   
-                        (_this select 0) setHitPointDamage ["hitEngine", 0.9];
+                        (_this select 0) setHitPointDamage ["hitEngine", 0.7];
                         [[], {[ (_this select 0),0 ] call BIS_fnc_holdActionRemove;}] remoteExec ["call",0];
                     },				// Code executed on completion
                     {},													// Code executed on interrupted
@@ -121,6 +121,7 @@ while {STOP_burning_vehicle_car} do {
                 deleteVehicle _Smoke;
                 deleteVehicle _light;
                 vehicle_on_fire = vehicle_on_fire - [_vehicle_select];
+                [_vehicle_select,10 ] call BIS_fnc_holdActionRemove;
             }
         }
     } forEach _vehicle;
