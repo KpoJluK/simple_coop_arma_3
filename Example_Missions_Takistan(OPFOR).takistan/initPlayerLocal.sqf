@@ -21,7 +21,11 @@ player addEventHandler [
 				};
 			}"
 		];
-		[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_loadInventory;
+		if(isNil {[player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory})then{
+			[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_loadInventory;
+		}else{
+			[player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory;
+		};
 		true
 	}
 ];
@@ -181,40 +185,42 @@ if(isClass (configFile >> "CfgPatches" >> "ace_main"))then{
 
 
 // bis arsenal
+if!(isClass (configFile >> "CfgPatches" >> "ace_main"))then{
+	[
+		ammo_1,											
+		"<t color='#ffffff'>Arsenal</t>",										
+		"\a3\ui_f\data\igui\cfg\actions\reload_ca.paa",	
+		"\a3\ui_f\data\igui\cfg\actions\reload_ca.paa",	
+		"_this distance _target < 10",						
+		"_caller distance _target < 10",						
+		{},													
+		{},													
+		{ ["Open",true] spawn BIS_fnc_arsenal },				
+		{},													
+		[],													
+		0.5,													
+		0,													
+		false,												
+		false												
+	] call BIS_fnc_holdActionAdd;
+};
 
-[
-	ammo_1,											
-	"<t color='#ffffff'>Arsenal</t>",										
-	"\a3\ui_f\data\igui\cfg\actions\reload_ca.paa",	
-	"\a3\ui_f\data\igui\cfg\actions\reload_ca.paa",	
-	"_this distance _target < 10",						
-	"_caller distance _target < 10",						
-	{},													
-	{},													
-	{ ["Open",true] spawn BIS_fnc_arsenal },				
-	{},													
-	[],													
-	0.5,													
-	0,													
-	false,												
-	false												
-] call BIS_fnc_holdActionAdd;
-
-
-[
-	ammo_2,											
-	"<t color='#ffffff'>Arsenal</t>",										
-	"\a3\ui_f\data\igui\cfg\actions\reload_ca.paa",	
-	"\a3\ui_f\data\igui\cfg\actions\reload_ca.paa",	
-	"_this distance _target < 10",						
-	"_caller distance _target < 10",						
-	{},													
-	{},													
-	{ ["Open",true] spawn BIS_fnc_arsenal },				
-	{},													
-	[],													
-	0.5,													
-	0,													
-	false,												
-	false												
-] call BIS_fnc_holdActionAdd;
+if!(isClass (configFile >> "CfgPatches" >> "ace_main"))then{
+	[
+		ammo_2,											
+		"<t color='#ffffff'>Arsenal</t>",										
+		"\a3\ui_f\data\igui\cfg\actions\reload_ca.paa",	
+		"\a3\ui_f\data\igui\cfg\actions\reload_ca.paa",	
+		"_this distance _target < 10",						
+		"_caller distance _target < 10",						
+		{},													
+		{},													
+		{ ["Open",true] spawn BIS_fnc_arsenal },				
+		{},													
+		[],													
+		0.5,													
+		0,													
+		false,												
+		false												
+	] call BIS_fnc_holdActionAdd;
+};

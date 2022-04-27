@@ -39,29 +39,6 @@ while {STOP_burning_vehicle_car} do {
             vehicle_on_fire pushBack _x;
             [_x,_time_to_burn_osnova,_damage_crew,_kill_crew] spawn {
                 params ["_vehicle_select","_time_to_burn_osnova","_damage_crew","_kill_crew"];
-                // add action
-                [
-                    _vehicle_select,											// Object the action is attached to
-                    "Потушить машину",										// Title of the action
-                    "\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",	// Idle icon shown on screen
-                    "\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",	// Progress icon shown on screen
-                    "_this distance _target < 5",						// Condition for the action to be shown
-                    "_caller distance _target < 5",						// Condition for the action to progress
-                    {},													// Code executed when action starts
-                    {},													// Code executed on every progress tick
-                    {   
-                        (_this select 0) setHitPointDamage ["hitEngine", 0.7];
-                        [[], {[ (_this select 0),0 ] call BIS_fnc_holdActionRemove;}] remoteExec ["call",0];
-                    },				// Code executed on completion
-                    {},													// Code executed on interrupted
-                    [_vehicle_select],													// Arguments passed to the scripts as _this select 3
-                    10,													// Action duration in seconds
-                    0,													// Priority
-                    true,												// Remove on completion
-                    false												// Show in unconscious state
-                ] remoteExec ["BIS_fnc_holdActionAdd", 0, _vehicle_select];	// MP compatible implementation
-
-
                 //find engine
                 _pos_fire_in_vehicle = [0, 1.5, -0.7];
                 if(_vehicle_select selectionPosition "hit_engine" isNotEqualTo [0,0,0])then{
@@ -111,7 +88,7 @@ while {STOP_burning_vehicle_car} do {
                     sleep 1;
                     _time_to_destroid = _time_to_destroid - 1;
                     if(_damage_crew isEqualTo true)then{{_x setDamage (getDammage _x + 0.0020)} forEach crew _vehicle_select;};
-                    !alive _vehicle_select or _vehicle_select getHitPointDamage "hitEngine" <= 0.9 or _time_to_destroid <= 0;
+                    !alive _vehicle_select or _vehicle_select getHitPointDamage "hitEngine" <= 0.8 or _time_to_destroid <= 0;
                 };
                 if(_time_to_destroid <=0)then{
                     _vehicle_select setDamage 1;

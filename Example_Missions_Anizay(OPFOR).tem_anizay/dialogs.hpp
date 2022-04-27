@@ -221,7 +221,7 @@ class Dialog_Player_general
 			soundEnter[] = {"\A3\ui_f\data\sound\RscButton\soundEnter",0.09,1.0};
 			soundEscape[] = {"\A3\ui_f\data\sound\RscButton\soundEscape",0.09,1.0};
 			soundPush[] = {"\A3\ui_f\data\sound\RscButton\soundPush",0.09,1.0};
-			action = "setViewDistance sliderPosition 1900;";
+			action = "setViewDistance sliderPosition 1900; setObjectViewDistance sliderPosition 1900;";
 			
 		};
 		class Control1827551605_copy1

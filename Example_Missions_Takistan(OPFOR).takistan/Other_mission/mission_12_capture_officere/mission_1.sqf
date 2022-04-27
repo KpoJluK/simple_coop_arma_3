@@ -52,7 +52,9 @@ _unit_1 setSkill 1;
 
 // create officer
 
-private _unit_officer = _group_terrorist createUnit [selectRandom _class_name_officer, _bilding_from_mission_general select 1, [], 0, "FORM"];
+private _group_Officer = createGroup [enemy_side, true];
+
+private _unit_officer = _group_Officer createUnit [selectRandom _class_name_officer, _bilding_from_mission_general select 1, [], 0, "FORM"];
 
 _unit_officer disableAI "Path";
 _unit_officer setSkill 0.1;

@@ -4,7 +4,7 @@ _arry_select_road = [];
 _list_roads = center_map nearRoads radius_map;
 waitUntil{
 	_select_road = selectRandom _list_roads;
-	if(!(getPos _select_road inArea [getMarkerPos "Pos_base", 1000, 1000, 45, false]) and ((surfaceNormal (getPos _select_road)) select 0) < 0.5 and ((surfaceNormal (getPos _select_road)) select 1) < 0.5)then{_arry_select_road pushBack _select_road};
+	if(!(getPos _select_road inArea [getMarkerPos "Pos_base", 2500, 2500, 45, false]) and ((surfaceNormal (getPos _select_road)) select 0) < 0.5 and ((surfaceNormal (getPos _select_road)) select 1) < 0.5)then{_arry_select_road pushBack _select_road};
 	(count _arry_select_road) == 30
 };
 // filter from small static

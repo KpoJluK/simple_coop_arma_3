@@ -52,7 +52,7 @@ private _find_pos_from_zenitki = [_pos_mission, 10, 150, 10, 0, 0.9, 0] call BIS
 private _find_pos_from_zenitki_1 = [_pos_mission, 10, 150, 10, 0, 0.9, 0] call BIS_fnc_findSafePos;
 private _find_pos_from_zenitki_2 = [_pos_mission, 10, 150, 10, 0, 0.9, 0] call BIS_fnc_findSafePos;
 //find pos from vuhka
-private _find_pos_from_vuhka = [_pos_mission, 50, 300, 10, 0, 0.9, 0] call BIS_fnc_findSafePos;
+private _find_pos_from_vuhka = [_pos_mission, 50, 300, 10, 0, 0.4, 0] call BIS_fnc_findSafePos;
 
 //spawn zenitki
 zenitka_goroda = [_find_pos_from_zenitki, 180, class_name_zenitka_who_deffend_city, enemy_side] call BIS_fnc_spawnVehicle;
@@ -67,6 +67,7 @@ zenitka_goroda_2 = [_find_pos_from_zenitki_2, 180, class_name_zenitka_who_deffen
 
 //create vuhka
 vuhka = "Land_Vysilac_FM" createVehicle _find_pos_from_vuhka;
+vuhka setVectorUp [0,0,0];
 
 //task destroin vshka
 ["Task_09_2", true, ["Уничтожить вышку","Уничтожить вышку","respawn_west"], getMarkerPos _Marker9, "CREATED", 5, true, true, "destroy", true] call BIS_fnc_setTask;
@@ -106,3 +107,16 @@ sleep 10;
 
 choise_mission = false;
 publicVariable "choise_mission";
+
+B_30mm_AP
+B_30mm_HE
+Bo_Mk82
+RHS_ammo_AGM_114M he
+RHS_ammo_AGM_114K  at
+rhs_ammo_agm65d at
+rhs_ammo_agm65f he
+rhs_ammo_gbu12
+rhs_ammo_gbu32
+rhs_ammo_30x173mm_GAU8_mixed
+
+
