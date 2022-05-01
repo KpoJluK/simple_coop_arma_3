@@ -1,3 +1,4 @@
+if(heli_help isEqualTo [])exitWith{hint"В вашей фракции нету пододящего вертолета!"};
 if(isNil "Call_help")then{
 	Call_help = false;
 	publicVariable "Call_help";
@@ -15,9 +16,16 @@ if(Call_help)exitWith{hint "Вертолет еще не готов для вз�
     if(isNil "_find_safe_pos")exitWith{hint "Возле вас негде приземлится!"};
     // Создаём невидимую вертолётную площадку, для точной посадки вертолёта
     private _helipad = "Land_HelipadEmpty_F" createVehicle _find_safe_pos;
+    // Создаём вертолёт
+    private _select_vehicle = selectRandom heli_help;
+    private _heli = createVehicle [_select_vehicle,  [0,0,300], [], 0, "FLY"];
+    // Создаём экипаж вертолёта
+    createVehicleCrew _heli;
     // Создаём группу десанта
-    private _supgroup = createGroup [EAST,true];
-    for "_i" from 0 to 12 do 
+    private _supgroup = createGroup [side(selectRandom allPlayers),true];
+    _count_inf_inside = ((_vehicle select 0) emptyPositions "cargo") - 1;
+	if(_count_inf_inside > 11)then{_count_inf_inside = 10};
+    for "_i" from 0 to _count_inf_inside do 
     {
     private _unit = _supgroup createUnit [selectRandom arry_inf_call_help_vdv, [0,0,0], [], 0, "FORM"];
     _unit setSkill 0.7;
@@ -25,10 +33,7 @@ if(Call_help)exitWith{hint "Вертолет еще не готов для вз�
     };
     // Заводим их в группу для погрузки в вертолёт
     private _unitsCargo = units _supgroup;
-    // Создаём вертолёт
-    private _heli = createVehicle ["RHS_Mi8mt_vvsc",  [0,0,300], [], 0, "FLY"];
-    // Создаём экипаж вертолёта
-    createVehicleCrew _heli;
+
     // Создаём контрмеры для цикличного использования
     private _flares = {
         while {alive driver _this && {!(isTouchingGround _this)}} do {    

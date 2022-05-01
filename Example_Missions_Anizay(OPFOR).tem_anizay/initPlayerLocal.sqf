@@ -1,8 +1,10 @@
+waitUntil {!isNull (finddisplay 46)};
+
 player addEventHandler [
 	"Killed",
 	{
 		[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_saveInventory;
-
+		removeAllActions player;
 		true
 	}
 ];
@@ -10,8 +12,10 @@ player addEventHandler [
 player addEventHandler [
 	"Respawn",
 	{	
-		player addAction ["<t color='#00ff22'>Меню игрока</t>",
-			"[] spawn{			
+		player addAction
+		[
+			"<t color='#00ff22'>Меню игрока</t>",	// title
+			{			
 				createDialog 'Dialog_Player_general';
 				waitUntil{
 					ctrlSetText [1908, str (sliderPosition 1900)]; 
@@ -19,7 +23,17 @@ player addEventHandler [
 					ctrlSetText [1910, str (sliderPosition 1902)]; 
 					!dialog
 				};
-			}"
+			},
+			nil,		// arguments
+			1,		// priority
+			true,		// showWindow
+			false,		// hideOnUse
+			"",			// shortcut
+			"true", 	// condition
+			0,			// radius
+			false,		// unconscious
+			"",			// selection
+			""			// memoryPoint
 		];
 		if(isNil {[player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory})then{
 			[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_loadInventory;

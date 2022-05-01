@@ -52,7 +52,9 @@ _unit_1 setSkill 1;
 
 // create officer
 
-private _unit_officer = _group_terrorist createUnit [selectRandom _class_name_officer, _bilding_from_mission_general select 1, [], 0, "FORM"];
+private _group_Officer = createGroup [enemy_side, true];
+
+private _unit_officer = _group_Officer createUnit [selectRandom _class_name_officer, _bilding_from_mission_general select 1, [], 0, "FORM"];
 
 _unit_officer disableAI "Path";
 _unit_officer setSkill 0.1;
@@ -90,7 +92,7 @@ _pos_bot = getPos _nearestRoad;
 	200,	// радиус патрулирования ботов
 	500,	// радиус размещения легких машин которые будут патрулировать зону(чем больше машин тем больше зону лучше сделать)
 	600,	// радиус патрулирования всех машин и легких танков
-	1000,	// радиус патрулирования вертолетов
+	2000,	// радиус патрулирования вертолетов
 	true, // включать ли ботам динамическую симуляцию?
 	false	// условик при котром боты будут удалены(УСЛОВИК ДОЛЖНО БЫТЬ ГЛОБАЛЬНО!!!)
 ] execVM "Other_mission\Shared\fn_other_missions_spawnEnemyBot.sqf";

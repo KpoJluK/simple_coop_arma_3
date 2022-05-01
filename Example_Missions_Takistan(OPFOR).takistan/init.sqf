@@ -5,7 +5,7 @@ resistance setFriend [west, 0];
 
 // add choise faction
 
-If(serverCommandAvailable '#kick')then{
+If(serverCommandAvailable '#kick' or !isMultiplayer)then{
 	// *****
 	// EXTRACT FACTION DATA
 	// *****
@@ -228,6 +228,23 @@ If(serverCommandAvailable '#kick')then{
 	} forEach heli_vehecle_arry;
 
 
+	// heli_form_help
+
+
+
+	_not_redy_help_heli = "(getText (_x >> 'faction') == faction(selectRandom allPlayers)) and (configName _x isKindOf ""Helicopter"" and getNumber (_x >> 'transportSoldier') >= 4)" configClasses (configFile >> "CfgVehicles");
+
+	heli_help = [];
+
+	{
+		heli_help pushBack (configName _x)
+	} forEach _not_redy_help_heli;
+
+	{ 
+		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{heli_help = heli_help - [_x]}; 
+	} forEach heli_help;
+
+
 	// anti air
 
 	anti_air_vehicle_arry = [];
@@ -257,8 +274,26 @@ If(serverCommandAvailable '#kick')then{
 		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{static_weapon_arry = static_weapon_arry - [_x]}; 
 	} forEach static_weapon_arry;
 
+	// static_mortar 
 
-	
+	_static_weapon_arry_not_redy_mortar = "(getText (_x >> 'faction') == enemy_fraction select 0) and (configName _x isKindOf ""StaticMortar"")" configClasses (configFile >> "CfgVehicles");
+
+	static_weapon_arry_mortar = [];
+	{
+		static_weapon_arry_mortar pushBack (configName _x)
+	} forEach _static_weapon_arry_not_redy_mortar;
+
+	{
+		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{static_weapon_arry_mortar = static_weapon_arry_mortar - [_x]}; 
+	} forEach static_weapon_arry_mortar;
+
+	// static form bloc bost
+
+	static_weapon_bloc_post = static_weapon_arry;
+	{
+		if((static_weapon_arry_mortar select _forEachIndex) in static_weapon_bloc_post)then{static_weapon_bloc_post = static_weapon_bloc_post - [_x]};
+	} forEach static_weapon_arry_mortar;
+
 	// if no car_vehilce
 
 	if(car_mission_arry isEqualTo [])then{
@@ -297,7 +332,7 @@ If(serverCommandAvailable '#kick')then{
 
 	Ready_enemy = true;
 	publicVariable "Ready_enemy";
-
+	publicVariable "heli_help";
 	publicVariable "inf_missions_arry";
 	publicVariable "car_mission_arry";
 	publicVariable "hevy_vehicle_arry";
@@ -315,7 +350,7 @@ If(serverCommandAvailable '#kick')then{
         !isNil {Ready_enemy}
     };
 	// action to select mission on board
-	If(serverCommandAvailable '#kick')then{
+	If(serverCommandAvailable '#kick' or !isMultiplayer)then{
 
 	Board_1 addAction ["<t color='#ff2e2e'>Миссия уничтожить танк</t>", "  
 	[[], {  

@@ -5,3 +5,43 @@ respawn = "BASE";
 respawnButton = 1;
 respawnDelay = 10;
 respawnTemplates[] = { "MenuPosition" };
+
+
+class Params
+{
+	class Daytime
+	{
+		title = "Время суток";
+		texts[] = {"Утро","День","Вечере","Ночь"};
+		values[] = {8,12,18,0};
+		default = 8;
+		function = "BIS_fnc_paramDaytime"; // (Optional) Function called when player joins, selected value is passed as an argument
+		isGlobal = 1; // (Optional) 1 to execute script / function locally for every player who joins, 0 to do it only on server
+	};
+    	class ViewDistance
+	{
+		title = "Дальность видимости";
+		values[] = {500,1000,2000,5000};
+		default = 2000;
+		file = "Param_mision\setViewDistance.sqf"; // (Optional) Script [[call]]ed when player joins, selected value is passed as an argument
+        isGlobal = 1;
+	};
+        class TIMEACCELERATION
+	{
+		title = "Ускорение времини";
+		values[] = {1,5,10,20,50};
+		default = 1;
+		function = "BIS_fnc_paramTimeAcceleration"; // (Optional) Script [[call]]ed when player joins, selected value is passed as an argument
+        isGlobal = 1;
+	};
+
+            class Wather
+	{
+		title = "Погода";
+        texts[] = {"Ясно","Облачно","Пасмурно","Дождь"};
+		values[] = {25,50,75,100};
+		default = 50;
+		file = "Param_mision\param_wather.sqf"; // (Optional) Script [[call]]ed when player joins, selected value is passed as an argument
+        isGlobal = 1;
+	};
+};

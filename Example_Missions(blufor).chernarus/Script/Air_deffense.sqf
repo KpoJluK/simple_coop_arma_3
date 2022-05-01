@@ -48,7 +48,7 @@ publicVariable "Call_air_deffense";
 	};
 
 0 spawn{
-	sleep 1200;
+	sleep 600;
 	Call_air_deffense = false;
 	publicVariable "Call_air_deffense";	
 };

@@ -4,8 +4,8 @@ waitUntil{
 };
 
 // боты которые прилетают на поддержку игрока
-
-_player_faction = ([] call BIS_fnc_getFactions select 182);
+_sleltct_faction_count = [selectRandom allPlayers] call BIS_fnc_getFactions;
+_player_faction = ([] call BIS_fnc_getFactions select _sleltct_faction_count);
 
 _arry_inf_call_help_vdv_not_redy = "(getText (_x >> 'faction') == _player_faction) and (configName _x isKindOf ""Man"")" configClasses (configFile >> "CfgVehicles"); 
 
@@ -22,6 +22,45 @@ arry_inf_call_help_vdv = [];
 {
 	if((getUnitLoadout _x select 0) isEqualTo [])then{arry_inf_call_help_vdv = arry_inf_call_help_vdv - [_x]};
 } forEach arry_inf_call_help_vdv; 
+
+
+// trash from iED
+
+trash_from_ied = [
+	"Land_GarbageWashingMachine_F", 
+	"Land_Garbage_square5_F", 
+	"Land_GarbageBarrel_01_F", 
+	"Land_GarbageHeap_01_F", 
+	"Land_Tyre_F", 
+	"Land_JunkPile_F", 
+	"Land_Tyres_F", 
+	"Land_GarbageHeap_04_F", 
+	"Land_GarbageHeap_03_F", 
+	"Land_GarbageHeap_02_F", 
+	"Land_GarbageBarrel_02_F", 
+	"Land_Sack_F", 
+	"Land_Sacks_heap_F", 
+	"Land_FishingGear_02_F", 
+	"Land_CrabCages_F", 
+	"Land_BarrelSand_F", 
+	"Land_BarrelSand_grey_F", 
+	"Land_BarrelTrash_F", 
+	"Land_BarrelTrash_grey_F",
+	"Land_TrailerCistern_wreck_F", 
+	"Land_Wreck_HMMWV_F", 
+	"Land_Wreck_Skodovka_F", 
+	"Land_Wreck_Truck_F", 
+	"Land_Wreck_Car2_F", 
+	"Land_Wreck_Car_F", 
+	"UK3CB_Lada_Wreck", 
+	"Land_Wreck_Van_F", 
+	"Land_Wreck_Offroad_F", 
+	"Land_Wreck_Offroad2_F", 
+	"Land_Wreck_UAZ_F", 
+	"Land_Wreck_Truck_dropside_F", 
+	"Land_V3S_wreck_F"
+];
+
 
 // from missions vehicle 
 //1
