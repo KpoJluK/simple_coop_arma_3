@@ -2,7 +2,7 @@
 // © v.2.5 MARCH 2016 - Devastator_cm
 
 private _Enemies 			= _this select 0;
-private _Vehicle 			= _this select 1;
+vehilce_convoy 			= _this select 1;
 private _EnemyRatings 		= [];  //[[Vehicle, Rating, Attack Rating, Type]]
 private _Typ 				= "";
 private _Rating 			= 0;
@@ -15,11 +15,11 @@ private _RandomEnemy		= objNull;
 private _DistanceCoef       = 0;
 private _BestEnemy 			= [];
 
-if(_Vehicle isKindOf "Tank") then {_RatingCoef = 40;};
+if(vehilce_convoy isKindOf "Tank") then {_RatingCoef = 40;};
 {
 	_Typ 				= "unknown";
 	_Rating 		 	= 0;
-	_DistanceCoef           = 100/(_Vehicle distance _x);
+	_DistanceCoef           = 100/(vehilce_convoy distance  getPos _x);
 	if(_x isKindOf "LandVehicle") then 
 	{	
 		_Typ 				= "LandVehicle";

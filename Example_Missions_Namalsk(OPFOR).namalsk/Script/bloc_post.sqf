@@ -46,7 +46,7 @@ _obgect_grabber =
 	["Land_DragonsTeeth_01_1x1_old_F",[1.63184,5.32422,0],0,1,0,[0,0],"","",true,false], 
 	["Land_DragonsTeeth_01_1x1_old_F",[-5.85938,1.375,0],0,1,0,[-0.0740187,0],"","",true,false], 
 	[selectRandom static_weapon_bloc_post,[5.25977,3.68164,3.2],323.741,1,0,[-1.94478,0.2354],"","",true,false], 
-	["Land_DragonsTeeth_01_1x1_old_F",[-2.7998,-7.33301,0],294.645,1,0,[0,0],"""","",true,false], 
+	["Land_DragonsTeeth_01_1x1_old_F",[-2.7998,-7.33301,0],294.645,1,0,[0,0],"","",true,false], 
 	[selectRandom static_weapon_bloc_post,[-6.59619,-2.86523,3.2],146.238,1,0,[-1.94481,0.235079],"","",true,false], 
 	["Land_BagBunker_Tower_F",[6.90332,4.33984,0],241.678,1,0,[0,0],"","",true,false], 
 	["Land_DragonsTeeth_01_1x1_old_F",[2.36914,8.26953,0],0,1,0,[-0.0740187,0],"","",true,false], 
