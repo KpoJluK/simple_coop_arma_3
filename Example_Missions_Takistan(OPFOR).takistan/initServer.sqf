@@ -54,8 +54,10 @@ if!((static_weapon_bloc_post select 0) isEqualTo str objNull)then{
     [] execVM "Script\bloc_post.sqf";
 };
 
+sleep 30;
+
 if!(trash_from_ied isEqualTo [])then{
-    [] execVM "Script\bloc_post.sqf";
+    [] execVM "Script\IED.sqf";
 };
 
 

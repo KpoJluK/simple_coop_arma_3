@@ -18,7 +18,7 @@ publicVariable "teleport1";
 
 
 
-pos_base = getPos ammo_1;
+pos_base = getMarkerPos "Pos_base";
 
 
 
@@ -54,8 +54,10 @@ if!((static_weapon_bloc_post select 0) isEqualTo str objNull)then{
     [] execVM "Script\bloc_post.sqf";
 };
 
+sleep 30;
+
 if!(trash_from_ied isEqualTo [])then{
-    [] execVM "Script\bloc_post.sqf";
+    [] execVM "Script\IED.sqf";
 };
 
 

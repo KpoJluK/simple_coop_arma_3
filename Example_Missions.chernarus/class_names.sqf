@@ -26,7 +26,8 @@ arry_inf_call_help_vdv = [];
 
 // trash from iED
 
-trash_from_ied = [
+trash_from_ied = 
+[
 	"Land_GarbageWashingMachine_F", 
 	"Land_Garbage_square5_F", 
 	"Land_GarbageBarrel_01_F", 
