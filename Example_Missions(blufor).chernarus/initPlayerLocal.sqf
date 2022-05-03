@@ -1,5 +1,7 @@
 waitUntil {!isNull (finddisplay 46)};
 
+[player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_saveInventory;
+
 player addEventHandler [
 	"Killed",
 	{
@@ -35,11 +37,7 @@ player addEventHandler [
 			"",			// selection
 			""			// memoryPoint
 		];
-		if(isNil {[player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory})then{
-			[player, [missionNamespace, "Inventory_on_death"]] call BIS_fnc_loadInventory;
-		}else{
-			[player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory;
-		};
+		[player, [missionNamespace, "player_saves_Inventory"]] call BIS_fnc_loadInventory;
 		true
 	}
 ];

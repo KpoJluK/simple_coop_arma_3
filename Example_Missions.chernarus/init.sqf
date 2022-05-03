@@ -349,6 +349,7 @@ If(serverCommandAvailable '#kick' or !isMultiplayer)then{
     waitUntil{
         !isNil {Ready_enemy}
     };
+	sleep 20;
 	// action to select mission on board
 	If(serverCommandAvailable '#kick' or !isMultiplayer)then{
 
