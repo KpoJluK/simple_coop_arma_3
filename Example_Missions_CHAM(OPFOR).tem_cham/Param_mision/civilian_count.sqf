@@ -1,0 +1,1 @@
+count_civilian_vehicle = (_this select 0);

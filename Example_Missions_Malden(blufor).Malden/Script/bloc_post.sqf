@@ -63,8 +63,8 @@ _obgect_grabber =
 arru_roads_of = [];
 _selected_road = [];
 // create bloc post
-_count_bloc_post = 0;
-if(count _list_roads > 20)then{_count_bloc_post = 20}else{_count_bloc_post = count _list_roads - 1};
+_count_bloc_post = count_bloc_post_on_map;
+if(_count_bloc_post >= count _list_roads)then{_count_bloc_post = count _list_roads - 1};
 for "_i" from 0 to _count_bloc_post do 
 {
 	waitUntil{

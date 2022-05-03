@@ -123,4 +123,19 @@ fnc_Eqvip_desant = {
 			[_unit,"WhiteHead_13","male02rus"] call BIS_fnc_setIdentity;
 };
 
-publicVariable "fnc_Eqvip_desant"
+publicVariable "fnc_Eqvip_desant";
+
+heli_civilian_arry = [
+	"RHS_Mi8t_civilian", 
+	"RHS_Mi8amt_civilian", 
+	"C_Heli_Light_01_civil_F"
+];
+
+vehicle_vivilian_arry = [
+	"C_Hatchback_01_sport_F", 
+	"C_Offroad_01_F", 
+	"C_Offroad_01_repair_F", 
+	"C_SUV_01_F", 
+	"C_Van_01_transport_F", 
+	"C_Van_01_box_F"
+];

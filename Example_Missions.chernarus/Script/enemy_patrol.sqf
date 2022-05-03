@@ -1,3 +1,7 @@
+if(isNil "Stot_patrol_enemy")then{
+	Stot_patrol_enemy = false;
+};
+
 _count_vehicle = [];
 
 // все дороги
@@ -15,7 +19,7 @@ private _nearbyLocations = nearestLocations [center_map, ['Name','NameCity','Nam
 
 waitUntil{
 	// выбор техники
-	if(count _count_vehicle <= 10)then{		
+	if(count _count_vehicle <= count_enemy_vehicle_patrol)then{		
 		_mission_arry_vehicle = [];
 		_mission_arry_vehicle append car_mission_arry;
 		_mission_arry_vehicle append hevy_vehicle_arry;
@@ -46,5 +50,5 @@ waitUntil{
 		if(!alive _x) then {_count_vehicle = _count_vehicle - [_x]}
 	} forEach _count_vehicle;
 	sleep 1;
-	!Stot_patrol
+	Stot_patrol_enemy
 };

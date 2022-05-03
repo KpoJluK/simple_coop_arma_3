@@ -1,0 +1,1 @@
+count_enemy_vehicle_patrol = (_this select 0);
