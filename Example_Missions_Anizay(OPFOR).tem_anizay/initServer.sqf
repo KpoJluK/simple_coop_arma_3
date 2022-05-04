@@ -60,6 +60,10 @@ if!(trash_from_ied isEqualTo [])then{
     [] execVM "Script\IED.sqf";
 };
 
+if!(vehicle_vivilian_arry isEqualTo [])then{
+    [] execVM "Script\civilian_ambient.sqf";
+};
+
 
 //choise_mission = false;
 //publicVariable "choise_mission";
