@@ -107,16 +107,3 @@ sleep 10;
 
 choise_mission = false;
 publicVariable "choise_mission";
-
-B_30mm_AP
-B_30mm_HE
-Bo_Mk82
-RHS_ammo_AGM_114M he
-RHS_ammo_AGM_114K  at
-rhs_ammo_agm65d at
-rhs_ammo_agm65f he
-rhs_ammo_gbu12
-rhs_ammo_gbu32
-rhs_ammo_30x173mm_GAU8_mixed
-
-

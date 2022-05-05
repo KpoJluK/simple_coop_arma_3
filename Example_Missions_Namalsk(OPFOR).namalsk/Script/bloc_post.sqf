@@ -19,14 +19,27 @@ _list_roads = center_map nearRoads radius_map;
 		((nearestTerrainObjects [(getPos _select_road), ["Tree"], 15]) isEqualTo [])
 	)then{_arry_select_road pushBack _select_road};
 } forEach _list_roads;
-// filter from static Mortar
+
+// filter position
+
+
+private _validPoints = [];
+
+{
+    private _point = (getPos _x);
+    if (_validPoints findIf {_x distance _point <= 250} == -1) then {
+        _validPoints pushBack _point;
+    };
+} forEach _list_roads;
+
+
 
 // filter from small static
-_static_weapon_arry_bloc_post = static_weapon_arry;
+_static_weapon_arry_bloc_post = static_weapon_bloc_post;
 
-for "_i" from 0 to (count static_weapon_arry) - 1 do 
+for "_i" from 0 to (count static_weapon_bloc_post) - 1 do 
 {
-	_jeep = static_weapon_arry select _i createVehicle [0,0,0];
+	_jeep = static_weapon_bloc_post select _i createVehicle [0,0,0];
 	if(((_jeep call BIS_fnc_boundingBoxDimensions) select 0) >= 5 or ((_jeep call BIS_fnc_boundingBoxDimensions) select 1) >= 5 or ((_jeep call BIS_fnc_boundingBoxDimensions) select 2) >= 5)then{_static_weapon_arry_bloc_post = _static_weapon_arry_bloc_post - [static_weapon_arry select _i]};
 	deleteVehicle _jeep;
 	sleep 1;

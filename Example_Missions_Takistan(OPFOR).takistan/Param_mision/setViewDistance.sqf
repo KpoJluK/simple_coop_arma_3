@@ -1,1 +1,0 @@
-setViewDistance (_this select 0); setObjectViewDistance (_this select 0);

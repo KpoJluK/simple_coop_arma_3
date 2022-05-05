@@ -42,6 +42,36 @@ player addEventHandler [
 	}
 ];
 
+// diasble 3-rd camera 
+
+if((paramsArray select 7) > 0)then{
+
+	player addEventHandler ["GetOutMan", {
+		params ["_unit", "_role", "_vehicle", "_turret"];
+	if (cameraOn == _unit && cameraView == "EXTERNAL") then {
+		_unit switchCamera "INTERNAL";
+		[] spawn {
+		hint "3-е лицо разрешено только в технике!";
+		sleep 3;
+		hint "";
+		};
+	};
+	}];
+	(findDisplay 46) displayAddEventHandler ["KeyDown", {
+	params ["_displayorcontrol", "_key", "_shift", "_ctrl", "_alt"];
+	if (isNull objectParent player) then {
+		if (_key in actionKeys "curatorPersonView") then {
+		[] spawn {
+			hint "3-е лицо разрешено только в технике!";
+			sleep 3;
+			hint "";
+		};
+		true 
+		}; 
+	};
+	}];
+};
+
 
 waitUntil{
 	!isNil {Ready_enemy}
@@ -236,3 +266,4 @@ if!(isClass (configFile >> "CfgPatches" >> "ace_main"))then{
 		false												
 	] call BIS_fnc_holdActionAdd;
 };
+

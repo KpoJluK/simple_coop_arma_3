@@ -1,1 +1,0 @@
-count_bloc_post_on_map = (_this select 0);

@@ -1,3 +1,7 @@
+// init param
+
+[] execVM "Param_mision\Param_mision.sqf";
+
 // init MHQ
 
 [] execVM "MHQ\MHQ_script.sqf";
@@ -49,7 +53,7 @@ if!((car_mission_arry select 0) isEqualTo str objNull)then{
     [] execVM "Script\Convoy\ConvoyInit.sqf";
 };
 
-sleep 30;
+sleep 20;
 // init bloc post
 if!((static_weapon_bloc_post select 0) isEqualTo str objNull)then{
     [] execVM "Script\bloc_post.sqf";
@@ -63,6 +67,7 @@ if!(trash_from_ied isEqualTo [])then{
 if!(vehicle_vivilian_arry isEqualTo [])then{
     [] execVM "Script\civilian_ambient.sqf";
 };
+
 
 
 //choise_mission = false;
