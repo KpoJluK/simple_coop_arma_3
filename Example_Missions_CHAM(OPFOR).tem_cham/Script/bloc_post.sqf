@@ -1,6 +1,7 @@
 
 _arry_select_road = [];
-_list_roads = center_map nearRoads radius_map;
+_list_roads = list_roads_all_map;
+
 {
 	_select_road = _x;
 	pos_road = getPos _select_road;
@@ -9,7 +10,6 @@ _list_roads = center_map nearRoads radius_map;
 	pos_y_plus = (pos_road select 1) + 10;
 	pos_y_minus = (pos_road select 1) - 10;
 	if(
-		!(getPos _select_road inArea [getMarkerPos "Pos_base", 2500, 2500, 45, false]) and 
 		(getRoadInfo _select_road) select 8 isEqualTo false and
 		((surfaceNormal [pos_x_plus,pos_road select 1,0]) select 0 < 0.4) and 
 		((surfaceNormal [pos_x_minus,pos_road select 1,0])select 0 < 0.4) and
@@ -30,6 +30,11 @@ private _validPoints = [];
     if (_validPoints findIf {_x distance _point <= 250} == -1) then {
         _validPoints pushBack _point;
     };
+} forEach _list_roads;
+
+// road colouser base
+{
+	if(getPos _x inArea [getMarkerPos "Pos_base", 2500, 2500, 45, false])then{_list_roads = _list_roads - [_x]}
 } forEach _list_roads;
 
 

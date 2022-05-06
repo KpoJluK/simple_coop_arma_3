@@ -1,7 +1,3 @@
-resistance setFriend [east, 0];
-resistance setFriend [west, 0];
-
-
 
 // add choise faction
 
@@ -159,186 +155,6 @@ If(serverCommandAvailable '#kick' or !isMultiplayer)then{
 	};
 
 	removeAllActions Board_1;
-
-	// Add class names to arry form mission
-
-	//inf 
-
-	_inf_missions_arry_not_redy = "(getText (_x >> 'faction') == enemy_fraction select 0) and (configName _x isKindOf ""Man"")" configClasses (configFile >> "CfgVehicles"); 
-
-	inf_missions_arry = [];
-	{
-		inf_missions_arry pushBack (configName _x)
-	} forEach _inf_missions_arry_not_redy;
-	// is visible
-	{
-		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{inf_missions_arry = inf_missions_arry - [_x]};
-	} forEach inf_missions_arry;
-	// is have weapon
-	{
-		if((getUnitLoadout _x select 0) isEqualTo [])then{inf_missions_arry = inf_missions_arry - [_x]};
-	} forEach inf_missions_arry; 
-	
-
-	//car
-
-	_car_mission_arry_not_redy = "(getText (_x >> 'faction') == enemy_fraction select 0) and (configName _x isKindOf ""Car"")" configClasses (configFile >> "CfgVehicles"); 
-
-	car_mission_arry = [];
-	{
-		car_mission_arry pushBack (configName _x)
-	} forEach _car_mission_arry_not_redy;
-
-	// visible car
-	{ 
-		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{car_mission_arry = car_mission_arry - [_x]}; 
-	} forEach car_mission_arry;
-
-	// have Turrets
-
-	{ 
-		if((_x call BIS_fnc_allTurrets) isEqualTo [] )then{car_mission_arry = car_mission_arry - [_x]}; 
-	} forEach car_mission_arry;
-
-
-	//tank 
-
-	_hevy_vehicle_arry_not_redy = "(getText (_x >> 'faction') == enemy_fraction select 0) and (configName _x isKindOf ""Tank"")" configClasses (configFile >> "CfgVehicles");
-
-	hevy_vehicle_arry = [];
-	{
-		hevy_vehicle_arry pushBack (configName _x)
-	} forEach _hevy_vehicle_arry_not_redy;
-
-	{ 
-		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{hevy_vehicle_arry = hevy_vehicle_arry - [_x]}; 
-	} forEach hevy_vehicle_arry;
-
-	//helicopter
-
-	_heli_vehecle_arry_not_redy = "(getText (_x >> 'faction') == enemy_fraction select 0) and (configName _x isKindOf ""Helicopter"")" configClasses (configFile >> "CfgVehicles");
-
-	heli_vehecle_arry = [];
-	{
-		heli_vehecle_arry pushBack (configName _x)
-	} forEach _heli_vehecle_arry_not_redy;
-
-	{ 
-		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{heli_vehecle_arry = heli_vehecle_arry - [_x]}; 
-	} forEach heli_vehecle_arry;
-
-
-	// heli_form_help
-
-
-
-	_not_redy_help_heli = "(getText (_x >> 'faction') == faction(selectRandom allPlayers)) and (configName _x isKindOf ""Helicopter"" and getNumber (_x >> 'transportSoldier') >= 4)" configClasses (configFile >> "CfgVehicles");
-
-	heli_help = [];
-
-	{
-		heli_help pushBack (configName _x)
-	} forEach _not_redy_help_heli;
-
-	{ 
-		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{heli_help = heli_help - [_x]}; 
-	} forEach heli_help;
-
-
-	// anti air
-
-	anti_air_vehicle_arry = [];
-
-	{ 
-		private _subCategory = getText (configFile >> "CfgVehicles" >> _x >> "editorSubcategory");
-		if(["EdSubcat_AAs", _subCategory] call BIS_fnc_inString)then{anti_air_vehicle_arry = anti_air_vehicle_arry + [_x]};
-	} forEach car_mission_arry;
-
-	{ 
-		private _subCategory = getText (configFile >> "CfgVehicles" >> _x >> "editorSubcategory");
-		if(["EdSubcat_AAs", _subCategory] call BIS_fnc_inString)then{anti_air_vehicle_arry = anti_air_vehicle_arry + [_x]};
-	} forEach hevy_vehicle_arry;
-
-
-
-	//StaticWeapon
-
-	_static_weapon_arry_not_redy = "(getText (_x >> 'faction') == enemy_fraction select 0) and (configName _x isKindOf ""StaticWeapon"")" configClasses (configFile >> "CfgVehicles");
-
-	static_weapon_arry = [];
-	{
-		static_weapon_arry pushBack (configName _x)
-	} forEach _static_weapon_arry_not_redy;
-
-	{ 
-		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{static_weapon_arry = static_weapon_arry - [_x]}; 
-	} forEach static_weapon_arry;
-
-	// static_mortar 
-
-	_static_weapon_arry_not_redy_mortar = "(getText (_x >> 'faction') == enemy_fraction select 0) and (configName _x isKindOf ""StaticMortar"")" configClasses (configFile >> "CfgVehicles");
-
-	static_weapon_arry_mortar = [];
-	{
-		static_weapon_arry_mortar pushBack (configName _x)
-	} forEach _static_weapon_arry_not_redy_mortar;
-
-	{
-		if(getNumber (configFile >> "CfgVehicles" >> _x >> "scope") < 1)then{static_weapon_arry_mortar = static_weapon_arry_mortar - [_x]}; 
-	} forEach static_weapon_arry_mortar;
-
-	// static form bloc bost
-
-	static_weapon_bloc_post = static_weapon_arry;
-	{
-		if((static_weapon_arry_mortar select _forEachIndex) in static_weapon_bloc_post)then{static_weapon_bloc_post = static_weapon_bloc_post - [_x]};
-	} forEach static_weapon_arry_mortar;
-
-	// if no car_vehilce
-
-	if(car_mission_arry isEqualTo [])then{
-		car_mission_arry append [str objNull];
-	};
-
-	// if no hevy_vehilce
-
-	if(hevy_vehicle_arry isEqualTo [])then{
-		if(isNil (car_mission_arry select 0))then{hevy_vehicle_arry append [str objNull];}else{car_mission_arry append car_mission_arry};
-	};
-	
-
-	// if no heli_vehilce
-
-	if(heli_vehecle_arry isEqualTo [])then{
-		heli_vehecle_arry append [str objNull];
-	};
-
-	// if no Static_weapon
-
-	if(static_weapon_arry isEqualTo [])then{
-		static_weapon_arry append [str objNull];
-	};
-
-	// if no anti air
-	if(anti_air_vehicle_arry isEqualTo [])then{
-		anti_air_vehicle_arry append hevy_vehicle_arry;
-		anti_air_vehicle_arry append car_mission_arry;
-	};
-
-
-	if((car_mission_arry select 0) isEqualTo str objNull)then{
-	["ВНИМАНИЕ В ВЫБРАНОЙ ФАРКЦИИ ОТСУЦТВУЮТ КЛЮЧЕНЫЕ ЮНИТЫ ДЛЯ ЗАДАНИЙ! Некоторые задания НЕ БУДУТ РАБОТАТЬ КОРРЕКТНО! Выберете другую фракцию!!"] remoteExec ["hint"];
-	};
-
-	Ready_enemy = true;
-	publicVariable "Ready_enemy";
-	publicVariable "heli_help";
-	publicVariable "inf_missions_arry";
-	publicVariable "car_mission_arry";
-	publicVariable "hevy_vehicle_arry";
-	publicVariable "heli_vehecle_arry";
-	publicVariable "static_weapon_arry";
-	publicVariable "anti_air_vehicle_arry";
 };
 
 
@@ -349,7 +165,9 @@ If(serverCommandAvailable '#kick' or !isMultiplayer)then{
     waitUntil{
         !isNil {Ready_enemy}
     };
-	sleep 20;
+	Board_1 addAction ["Идет загрузка основных скриптов подождите...",""];
+	sleep 120;
+	removeAllActions Board_1;
 	// action to select mission on board
 	If(serverCommandAvailable '#kick' or !isMultiplayer)then{
 
@@ -530,7 +348,7 @@ If(serverCommandAvailable '#kick' or !isMultiplayer)then{
 	pos_mision_12 = _locationPos; 
 		[ 
 			pos_mision_12, 
-	arry_class_names_officer, 
+			arry_class_names_officer, 
 			inf_missions_arry, 
 			300, 
 			pos_base 

@@ -8,7 +8,7 @@ _count_vehicle = [];
 // все дороги
 private _list_road = [];
 // поиск дорог которые есть
-_list_road = center_map nearRoads radius_map;
+_list_road = list_roads_all_map;
 
 
 // функция поиска дороги

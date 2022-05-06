@@ -40,25 +40,44 @@ private _smoke1 = "test_EmptyObjectForSmoke" createVehicle getPos _heli_down;
 _smoke1 setPos(getPos _heli_down);
 //bot
 private _find_pos_bot = _heli_down getPos [random 50, random 360];
-//создание ботов 
+//создание ботов
+
+_count_statica = 3 + count allPlayers;
+if(_count_statica > 10)then{_count_statica = 10};
+
+_count_light_mashine = 2 + count allPlayers;
+if(_count_light_mashine > 6)then{_count_light_mashine = 6};
+
+_count_hevy_mashine = 1 + floor (count allPlayers / 4);
+if(_count_hevy_mashine > 4)then{_count_hevy_mashine = 4};
+
+_count_ZSY = 1 + floor (count allPlayers / 2);
+if(_count_ZSY > 4)then{_count_ZSY = 4};
+
+_count_Heli = floor (count allPlayers / 2);
+if(_count_Heli > 2)then{_count_Heli = 2};
+
+_count_group_bot = 3 + count allPlayers;
+if(_count_group_bot > 10)then{_count_group_bot = 10};
+
 [
 	_find_pos_bot,	// массив координатов где будет центр здания
 
 	enemy_side,	// сторона ботов можнт быть: EAST, WEST, independent
 	0.8, // уровень скила ботов (значение от 0.1 до 1)
-inf_missions_arry,
-car_mission_arry,
-hevy_vehicle_arry,
-anti_air_vehicle_arry,
-heli_vehecle_arry,
-static_weapon_arry,
+	inf_missions_arry,
+	car_mission_arry,
+	hevy_vehicle_arry,
+	anti_air_vehicle_arry,
+	heli_vehecle_arry,
+	static_weapon_arry,
 	300, // радиус (от центра) размещения статичных орудий(м)
-	3 + count allPlayers, // количество статичных орудий
-	2 + count allPlayers,	// количество легких машин которые будут патрулировать зону
-	1 + floor (count allPlayers / 4) ,	// количество тяжолой техники которая будует патрулировать зону
-	1 + floor (count allPlayers / 2),	// количество самоходных зенитныйх установок которые будут патрулировать зону
-	random 2,	//	количество вертолетов которые будут патрулировать зону
-	3 + count allPlayers,	// количество групп ботов которые будет охранять зону
+	_count_statica, // количество статичных орудий
+	_count_light_mashine,	// количество легких машин которые будут патрулировать зону
+	_count_hevy_mashine ,	// количество тяжолой техники которая будует патрулировать зону
+	_count_ZSY,	// количество самоходных зенитныйх установок которые будут патрулировать зону
+	_count_Heli,	//	количество вертолетов которые будут патрулировать зону
+	_count_group_bot,	// количество групп ботов которые будет охранять зону
 	random 5,	//	количество ботов в группах которые будут охранять зону
 	false,	// спаунить ли ботов на крышах домов
 	100, // радиус поиска домов внутри которых будут боты(на крышах и внутри)
@@ -96,6 +115,23 @@ _pilot2 = _group_pilot createUnit [_pilot_classname, _second_mission, [], 0, "FO
 [_pilot1, true] call ACE_captives_fnc_setHandcuffed;
 [_pilot2, true] call ACE_captives_fnc_setHandcuffed;
 //bot
+_count_statica = 3 + count allPlayers;
+if(_count_statica > 10)then{_count_statica = 10};
+
+_count_light_mashine = 2 + count allPlayers;
+if(_count_light_mashine > 6)then{_count_light_mashine = 6};
+
+_count_hevy_mashine = 1 + floor (count allPlayers / 4);
+if(_count_hevy_mashine > 4)then{_count_hevy_mashine = 4};
+
+_count_ZSY = 1 + floor (count allPlayers / 2);
+if(_count_ZSY > 4)then{_count_ZSY = 4};
+
+_count_Heli = floor (count allPlayers / 2);
+if(_count_Heli > 2)then{_count_Heli = 2};
+
+_count_group_bot = 3 + count allPlayers;
+if(_count_group_bot > 10)then{_count_group_bot = 10};
 [
 	_second_mission,	// массив координатов где будет центр здания
 
@@ -108,12 +144,12 @@ _pilot2 = _group_pilot createUnit [_pilot_classname, _second_mission, [], 0, "FO
 	heli_vehecle_arry,
 	static_weapon_arry,
 	300, // радиус (от центра) размещения статичных орудий(м)
-	3 + count allPlayers, // количество статичных орудий
-	2 + count allPlayers,	// количество легких машин которые будут патрулировать зону
-	1 + floor (count allPlayers / 4) ,	// количество тяжолой техники которая будует патрулировать зону
-	1 + floor (count allPlayers / 2),	// количество самоходных зенитныйх установок которые будут патрулировать зону
-	random 2,	//	количество вертолетов которые будут патрулировать зону
-	3 + count allPlayers,	// количество групп ботов которые будет охранять зону
+	_count_statica, // количество статичных орудий
+	_count_light_mashine,	// количество легких машин которые будут патрулировать зону
+	_count_hevy_mashine ,	// количество тяжолой техники которая будует патрулировать зону
+	_count_ZSY,	// количество самоходных зенитныйх установок которые будут патрулировать зону
+	_count_Heli,	//	количество вертолетов которые будут патрулировать зону
+	_count_group_bot,	// количество групп ботов которые будет охранять зону
 	3,	//	количество ботов в группах которые будут охранять зону
 	true,	// спаунить ли ботов на крышах домов
 	100, // радиус поиска домов внутри которых будут боты(на крышах и внутри)

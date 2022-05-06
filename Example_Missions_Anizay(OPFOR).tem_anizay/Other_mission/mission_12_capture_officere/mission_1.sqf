@@ -31,31 +31,32 @@ private _bilding_from_mission_general = [];
     _select_bilding = selectRandom _arry_bilding;
     _bilding_from_mission = [_select_bilding, -1] call BIS_fnc_buildingPositions;
     _count_bolding_pos = count _bilding_from_mission;
-    if(_count_bolding_pos >= 2)exitWith{
+    if(_count_bolding_pos >= 8)exitWith{
         _bilding_from_mission_general = _bilding_from_mission;
         };
 };
 
 
-if (_bilding_from_mission_general isEqualTo [])exitWith{hint"Не найдено подходящих зданий"};
+if (_bilding_from_mission_general isEqualTo [])exitWith{"Не найдено подходящих зданий, попробуйте еще раз" remoteExec ["hint"]};
 
 
 
 // create bot terrorist
 private _group_terrorist = createGroup [enemy_side, true];
-
-private _unit_1 = _group_terrorist createUnit [selectRandom _arry_class_name_terorist, _bilding_from_mission_general select 0, [], 0, "FORM"];
-
-_unit_1 disableAI "Path";
-
-_unit_1 setSkill 1;
+for "_i" from 0 to 8 do 
+{
+	private _unit_1 = _group_terrorist createUnit [selectRandom _arry_class_name_terorist, _bilding_from_mission_general select _i, [], 0, "FORM"];
+	_unit_1 disableAI "Path";
+	_unit_1 setSkill 1;
+};
 
 // create officer
 
 private _group_Officer = createGroup [enemy_side, true];
 
-private _unit_officer = _group_Officer createUnit [selectRandom _class_name_officer, _bilding_from_mission_general select 1, [], 0, "FORM"];
+private _unit_officer = _group_Officer createUnit [selectRandom _class_name_officer, _bilding_from_mission_general select (floor(random 8)), [], 0, "FORM"];
 
+_unit_officer setCaptive true;
 _unit_officer disableAI "Path";
 _unit_officer setSkill 0.1;
 
@@ -64,6 +65,23 @@ _unit_officer setSkill 0.1;
 _nearestRoad = [getPos _unit_officer, 200] call BIS_fnc_nearestRoad;
 _pos_bot = getPos _nearestRoad;
 
+_count_statica = 3 + count allPlayers;
+if(_count_statica > 10)then{_count_statica = 10};
+
+_count_light_mashine = 2 + count allPlayers;
+if(_count_light_mashine > 6)then{_count_light_mashine = 6};
+
+_count_hevy_mashine = 1 + floor (count allPlayers / 4);
+if(_count_hevy_mashine > 4)then{_count_hevy_mashine = 4};
+
+_count_ZSY = 1 + floor (count allPlayers / 2);
+if(_count_ZSY > 4)then{_count_ZSY = 4};
+
+_count_Heli = floor (count allPlayers / 2);
+if(_count_Heli > 2)then{_count_Heli = 2};
+
+_count_group_bot = 3 + count allPlayers;
+if(_count_group_bot > 10)then{_count_group_bot = 10};
 [
 	_pos_bot,	// массив координатов где будет центр здания
 
@@ -76,12 +94,12 @@ _pos_bot = getPos _nearestRoad;
 	heli_vehecle_arry,
 	static_weapon_arry,
 	300, // радиус (от центра) размещения статичных орудий(м)
-	3 + count allPlayers, // количество статичных орудий
-	2 + count allPlayers,	// количество легких машин которые будут патрулировать зону
-	1 + floor (count allPlayers / 4) ,	// количество тяжолой техники которая будует патрулировать зону
-	1 + floor (count allPlayers / 2),	// количество самоходных зенитныйх установок которые будут патрулировать зону
-	random 2,	//	количество вертолетов которые будут патрулировать зону
-	3 + count allPlayers,	// количество групп ботов которые будет охранять зону
+	_count_statica, // количество статичных орудий
+	_count_light_mashine,	// количество легких машин которые будут патрулировать зону
+	_count_hevy_mashine ,	// количество тяжолой техники которая будует патрулировать зону
+	_count_ZSY,	// количество самоходных зенитныйх установок которые будут патрулировать зону
+	_count_Heli,	//	количество вертолетов которые будут патрулировать зону
+	_count_group_bot,	// количество групп ботов которые будет охранять зону
 	random 5,	//	количество ботов в группах которые будут охранять зону
 	true,	// спаунить ли ботов на крышах домов
 	100, // радиус поиска домов внутри которых будут боты(на крышах и внутри)
@@ -104,9 +122,10 @@ waitUntil{
     _capture or !alive _unit_officer
 };
 
-removeHeadgear _unit_officer;
-_unit_officer addHeadgear "mgsr_headbag";
-
+if(_unit_officer getVariable ["ace_captives_isHandcuffed",false])then{
+	_unit_officer addHeadgear "mgsr_headbag";
+	removeHeadgear _unit_officer;
+};
 
 waitUntil{
     sleep 10;

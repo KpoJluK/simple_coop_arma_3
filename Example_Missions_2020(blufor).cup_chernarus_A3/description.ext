@@ -1,0 +1,84 @@
+﻿#include "defines.hpp"
+#include "dialogs.hpp"
+
+respawn = "BASE";	
+respawnButton = 1;
+respawnDelay = 10;
+respawnTemplates[] = { "MenuPosition" };
+
+
+class Params
+{
+		class CountCivilianVehicle
+	{
+		title = "Количество гражданских машин на карте";
+        texts[] = {"0","10","20","30(желательно выделенный сервер)","40(желательно выделенный сервер)"};
+		values[] = {0,10,20,30,40};
+		default = 10;
+        isGlobal = 1;
+	};
+		class CountEnemyPatrol
+	{
+		title = "Количество вражеских патрулей на карте";
+        texts[] = {"0","10","20","30(желательно выделенный сервер)","40(желательно выделенный сервер)"};
+		values[] = {0,10,20,30,40};
+		default = 10;
+        isGlobal = 1;
+	};
+		class CountBlocPost
+	{
+		title = "Количество вражеских блок постов на карте";
+        texts[] = {"0","10","20","30(желательно выделенный сервер)","40(желательно выделенный сервер)"};
+		values[] = {0,10,20,30,40};
+		default = 10;
+        isGlobal = 1;
+	};
+		class Daytime
+	{
+		title = "Время суток";
+		texts[] = {"Утро","День","Вечере","Ночь"};
+		values[] = {8,12,18,0};
+		default = 8;
+		function = "BIS_fnc_paramDaytime"; // (Optional) Function called when player joins, selected value is passed as an argument
+		isGlobal = 1; // (Optional) 1 to execute script / function locally for every player who joins, 0 to do it only on server
+	};
+		class ViewDistance
+	{
+		title = "Дальность видимости";
+		values[] = {500,1000,2000,5000};
+		default = 2000;
+        isGlobal = 1;
+	};
+		class TIMEACCELERATION
+	{
+		title = "Ускорение времини";
+		texts[] = {"x1","x5","x10","x20","x50","x60","x70","x80","x90","x100","x120"};
+		values[] = {1,5,10,20,50,60,70,80,90,100,120};
+		default = 1;
+        isGlobal = 1;
+	};
+		class OnFastNight
+	{
+		title = "Ускорять ли время ночью";
+        texts[] = {"Нет","х30","х60","х120"};
+		values[] = {0,30,60,120};
+		default = 60;
+        isGlobal = 1;
+	};
+		class DisableThirdCamera
+	{
+		title = "Разрешить 3-е лицо только в технике?";
+        texts[] = {"Резрешено везде", "Разрешено только в технике"};
+		values[] = {0,1};
+		default = 0;
+        isGlobal = 1;
+	};
+			class Wather
+	{
+		title = "Погода";
+        texts[] = {"Ясно","Легкая облачность","Облачно","Облачно/легкий дождь","Дождь"};
+		values[] = {0,25,50,75,100};
+		default = 25;
+        isGlobal = 1;
+	};
+};
