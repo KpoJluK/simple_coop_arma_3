@@ -165,7 +165,7 @@ If(serverCommandAvailable '#kick' or !isMultiplayer)then{
     waitUntil{
         !isNil {Ready_enemy}
     };
-	Board_1 addAction ["Идет загрузка основных скриптов подождите...",""];
+	Board_1 addAction ["Миссии не доступны пока идет загрузка основных скриптов, подождите...",""];
 	sleep 120;
 	removeAllActions Board_1;
 	// action to select mission on board

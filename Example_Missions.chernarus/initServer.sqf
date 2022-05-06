@@ -10,10 +10,18 @@ west setFriend [resistance, 0];
 
 [] execVM "Param_mision\Param_mision.sqf";
 
+
+//add class names 
+[] execVM "class_names.sqf";
+
+sleep 5;
+
 // init MHQ
 
-[] execVM "MHQ\MHQ_script.sqf";
-
+[
+	mhq_class_name,	//- класс нейм КШМ
+	getMarkerPos "Pos_base"		//- кординаты где он будет появлятся в начале и после смерти, можно использовать поизцию предмета getPos player или позицию маркера getMarkerPos "Marker_1"
+] execVM "MHQ\MHQ_script.sqf";
 
 // add vehicle in fire
 [
@@ -233,11 +241,6 @@ waitUntil{
 
 sleep 5;
 
-//add class names 
-[] execVM "class_names.sqf";
-
-sleep 5;
-
 // script patrol
 
 if!((car_mission_arry select 0) isEqualTo str objNull)then{
@@ -250,11 +253,12 @@ if!((static_weapon_bloc_post select 0) isEqualTo str objNull)then{
     [] execVM "Script\bloc_post.sqf";
 };
 
-sleep 5;
 // IED
+sleep 5;
 if!(trash_from_ied isEqualTo [])then{
     [] execVM "Script\IED.sqf";
 };
+
 // civilian script
 sleep 5;
 if!(vehicle_vivilian_arry isEqualTo [])then{
