@@ -18,7 +18,7 @@ arry_ied_armred = [];
 for "_i" from 0 to ((count _list_road) / 100) do 
 {
 	sleep 0.1;
-	_IED = (selectRandom trash_from_ied) createVehicle (selectRandom _list_road) getPos [2 + random 2, random 360];
+	_IED = (selectRandom trash_from_ied) createVehicle ((selectRandom _list_road) getPos [2 + random 2, random 360]);
 	arry_ied pushBack _IED;
 };
 

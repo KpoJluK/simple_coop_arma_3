@@ -125,7 +125,7 @@ If(serverCommandAvailable '#kick' or !isMultiplayer)then{
 	if!(side (selectRandom allPlayers) isEqualTo west)then{
 		{
 
-			private _action = Board_1 addAction [format ["<t color='#2e85ff'>%1</t>",((West_side select _forEachIndex) select 1)], {enemy_fraction = (West_side select (_this select 3));enemy_side = WEST; publicVariable "enemy_side";},_forEachIndex];
+			private _action = Board_1 addAction [format ["<t color='#2e85ff'>%1</t>",((West_side select _forEachIndex) select 1)], {enemy_fraction = (West_side select (_this select 3));enemy_side = WEST; publicVariable "enemy_side"; publicVariable "enemy_fraction";},_forEachIndex];
 			Board_1 setUserActionText [_action , format ["<t color='#2e85ff'>%1</t>",((West_side select _forEachIndex) select 1)], format ["<img size='4' image='%1'/>", ((West_side select _forEachIndex) select 2)]];
 			
 		} forEach West_side;
@@ -134,7 +134,7 @@ If(serverCommandAvailable '#kick' or !isMultiplayer)then{
 	if!(side (selectRandom allPlayers) isEqualTo EAST)then{
 		{
 
-			private _action = Board_1 addAction [format ["<t color='#ff0d00'>%1</t>",((East_side select _forEachIndex) select 1)], {enemy_fraction = (East_side select (_this select 3));enemy_side = EAST; publicVariable "enemy_side";},_forEachIndex];
+			private _action = Board_1 addAction [format ["<t color='#ff0d00'>%1</t>",((East_side select _forEachIndex) select 1)], {enemy_fraction = (East_side select (_this select 3));enemy_side = EAST; publicVariable "enemy_side"; publicVariable "enemy_fraction";},_forEachIndex];
 			Board_1 setUserActionText [_action , format ["<t color='#ff0d00'>%1</t>",((East_side select _forEachIndex) select 1)], format ["<img size='4' image='%1'/>", ((East_side select _forEachIndex) select 2)]];
 			
 		} forEach East_side;
@@ -143,7 +143,7 @@ If(serverCommandAvailable '#kick' or !isMultiplayer)then{
 	if!(side (selectRandom allPlayers) isEqualTo independent)then{
 		{
 
-			private _action = Board_1 addAction [format ["<t color='#57ff24'>%1</t>",((Independent_side select _forEachIndex) select 1)], {enemy_fraction = (Independent_side select (_this select 3));enemy_side = independent; publicVariable "enemy_side";},_forEachIndex];
+			private _action = Board_1 addAction [format ["<t color='#57ff24'>%1</t>",((Independent_side select _forEachIndex) select 1)], {enemy_fraction = (Independent_side select (_this select 3));enemy_side = independent; publicVariable "enemy_side"; publicVariable "enemy_fraction";},_forEachIndex];
 			Board_1 setUserActionText [_action , format ["<t color='#57ff24'>%1</t>",((Independent_side select _forEachIndex) select 1)], format ["<img size='4' image='%1'/>", ((Independent_side select _forEachIndex) select 2)]];
 			
 		} forEach Independent_side;
